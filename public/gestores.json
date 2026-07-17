@@ -1,0 +1,38 @@
+[
+  {
+    "nome": "Sandro Da Silva",
+    "descricao": "Fundador",
+    "imagem": "/images/virtruviano2.png",
+    "grupo": "colegio"
+  },
+    {
+    "nome": "Membro da Equipa",
+    "descricao": "Director Geral",
+    "imagem": "/images/virtruviano2.png",
+    "grupo": "direcao"
+  },
+  {
+    "nome": "Membro da Equipa",
+    "descricao": "Director de Operações",
+    "imagem": "/images/virtruviano2.png",
+    "grupo": "direcao"
+  },
+  {
+    "nome": "Membro da Equipa",
+    "descricao": "Director Financeiro",
+    "imagem": "/images/virtruviano2.png",
+    "grupo": "direcao"
+  },
+  {
+    "nome": "Membro da Equipa",
+    "descricao": "Director de Marketing",
+    "imagem": "/images/virtruviano2.png",
+    "grupo": "direcao"
+  },
+  {
+    "nome": "Membro da Equipa",
+    "descricao": "Director de Recursos Humanos",
+    "imagem": "/images/virtruviano2.png",
+    "grupo": "direcao"
+  }
+]

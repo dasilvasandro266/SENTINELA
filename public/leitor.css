@@ -1,0 +1,277 @@
+/* ================================
+   RESET + BASE (PALETA HOME)
+=================================== */
+:root {
+  --p1: #F5F0E6;
+  --p2: #F0E5D5;
+  --p3: #E8DCCC;
+  --p4: #E0D0B8;
+  --p5: #D8C4A8;
+  --p6: #D2B48C;
+  --p7: #C4A27A;
+  --p8: #B69060;
+  --p9: #8B7355;
+  --p10: #6B4F3A;
+  --p11: #4A3B2C;
+  --p12: #2C231C;
+  --p13: #FFFFFF;
+  --p14: #D9C5AD;
+  --p15: #F5F0E6;
+  --p16: #DCC3A1;
+  --p17: #204b5e;
+  --p18: #426b65;
+  --p19: #baab6a;
+  --p20: #fbea80;
+  --p21: #fdfac7;
+  --p22: #0f0f15;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 24px 20px 40px;
+  font-family: 'Times New Roman', Times, serif;
+  background: var(--p16);
+  color: var(--p1);
+  line-height: 1.65;
+}
+
+/* Links consistentes */
+a {
+  color: var(--p6);
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+a:hover {
+  color: var(--p1);
+}
+
+/* ================================
+   CONTAINER PRINCIPAL
+=================================== */
+#legislacao-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  background: linear-gradient(145deg, rgba(74, 59, 44, 0.94), rgba(44, 35, 28, 0.98));
+  color: var(--p1);
+  padding: 28px;
+  border-radius: 18px;
+  box-shadow: 0 20px 50px rgba(44, 35, 28, 0.45), inset 0 0 16px rgba(245, 240, 230, 0.08);
+  border: 1px solid rgba(210, 180, 140, 0.28);
+  backdrop-filter: blur(8px) saturate(120%);
+}
+
+/* Mobile ajustado */
+@media (max-width: 768px) {
+  body {
+    padding: 18px 14px 32px;
+  }
+
+  #legislacao-container {
+    width: 100%;
+    padding: 18px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(44, 35, 28, 0.35);
+  }
+}
+
+/* ================================
+   BARRA DE PESQUISA
+=================================== */
+#search {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(74, 59, 44, 0.92);
+  padding: 12px 16px;
+  font-size: 16px;
+  border: 1px solid rgba(210, 180, 140, 0.4);
+  border-radius: 20px;
+  color: var(--p1);
+  width: 100%;
+  margin-bottom: 18px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(6px);
+}
+
+body.has-anime-nav #search {
+  top: 92px;
+}
+
+@media (max-width: 768px) {
+  body.has-anime-nav #search {
+    top: 78px;
+  }
+}
+
+#search::placeholder {
+  color: rgba(245, 240, 230, 0.6);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+#search:focus {
+  border-color: var(--p6);
+  box-shadow: 0 0 0 4px rgba(210, 180, 140, 0.22);
+  transform: scale(1.01);
+  outline: none;
+}
+
+/* ================================
+   RESULTADOS
+=================================== */
+#resultados-pesquisa {
+  margin-top: 20px;
+  padding: 14px;
+  border-radius: 10px;
+  background: rgba(44, 35, 28, 0.65);
+  color: var(--p2);
+  border: 1px solid rgba(210, 180, 140, 0.18);
+}
+
+/* ================================
+   TÍTULOS E SUBTÍTULOS
+=================================== */
+.titulo-item,
+.subtitulo-item {
+  margin-top: 18px;
+  padding: 12px;
+  background: linear-gradient(90deg, rgba(74, 59, 44, 0.9), rgba(44, 35, 28, 0.95));
+  border-left: 4px solid var(--p6);
+  border-radius: 6px;
+  font-weight: bold;
+  color: var(--p1);
+  box-shadow: inset 0 0 8px rgba(210, 180, 140, 0.2);
+}
+
+/* ================================
+   ARTIGOS
+=================================== */
+.artigo-item {
+  position: relative;
+  padding: 16px;
+  border: 1px solid rgba(210, 180, 140, 0.4);
+  margin-bottom: 12px;
+  border-radius: 12px;
+  background: rgba(44, 35, 28, 0.85);
+  color: var(--p1);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.artigo-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 14px rgba(210, 180, 140, 0.35);
+}
+
+.artigo-item.has-remissao {
+  background: rgba(74, 59, 44, 0.85);
+  border-left: 3px solid var(--p6);
+}
+
+/* Botão canto direito */
+.artigo-item .remissao-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: var(--p6);
+  color: var(--p12);
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.artigo-item .remissao-btn:hover {
+  background: var(--p1);
+  transform: scale(1.05);
+}
+
+/* ================================
+   LISTAS
+=================================== */
+.alineas li {
+  margin-bottom: 4px;
+}
+
+.alineas li strong {
+  color: var(--p6);
+  margin-right: 8px;
+}
+
+.alineas {
+  margin-left: 40px;
+  margin-bottom: 12px;
+  list-style-type: none;
+}
+
+/* ================================
+   BOTÃO TOPO
+=================================== */
+#btn-topo {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: var(--p6);
+  color: var(--p12);
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 999;
+  box-shadow: 0 4px 12px rgba(44, 35, 28, 0.6);
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+#btn-topo:hover {
+  background: var(--p1);
+  transform: translateY(-4px);
+}
+
+/* ================================
+   FORMULÁRIO REMISSÃO
+=================================== */
+.remissao-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  background: rgba(44, 35, 28, 0.98);
+  padding: 36px 24px 24px;
+  border: 1px solid rgba(210, 180, 140, 0.45);
+  border-radius: 12px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 80vh;
+  box-shadow: 0 0 20px rgba(44, 35, 28, 0.6);
+  color: var(--p1);
+  display: flex;
+  flex-direction: column;
+}
+
+.remissao-container label,
+.remissao-container input,
+.remissao-container textarea {
+  display: block;
+  width: 100%;
+  margin-top: 12px;
+  font-size: 14px;
+  background: rgba(74, 59, 44, 0.7);
+  border: 1px solid rgba(210, 180, 140, 0.35);
+  color: var(--p1);
+  padding: 8px 10px;
+  border-radius: 6px;
+}
+
+/* Status de conexão */
+#connection-status {
+  color: var(--p6);
+}

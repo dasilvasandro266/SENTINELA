@@ -1,0 +1,125 @@
+:root {
+  --pwa-install-bg: rgba(15, 15, 21, 0.96);
+  --pwa-install-text: #f5f0e6;
+  --pwa-install-accent: #fbea80;
+  --pwa-install-border: rgba(255, 255, 255, 0.1);
+  --pwa-install-safe-bottom: 22px;
+}
+
+.pwa-install-banner {
+  position: fixed;
+  left: 16px;
+  right: 16px;
+  /* Afastar da anime-nav (≈ 64px) + margem + safe-area */
+  bottom: calc(
+    var(--pwa-install-safe-bottom) +
+    env(safe-area-inset-bottom) +
+    72px
+  );
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(32, 75, 94, 0.42), rgba(15, 15, 21, 0.96)),
+    var(--pwa-install-bg);
+  color: var(--pwa-install-text);
+  border: 1px solid var(--pwa-install-border);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.24);
+  /* Acima do hiromi-widget (11000) mas abaixo de modais (20001) */
+  z-index: 12500;
+  backdrop-filter: blur(18px);
+  transition: transform 0.24s ease, opacity 0.24s ease;
+}
+
+.pwa-install-banner.hidden {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  pointer-events: none;
+}
+
+.pwa-install-text {
+  flex: 1 1 auto;
+  font-size: 0.96rem;
+  line-height: 1.35;
+  margin: 0;
+}
+
+.pwa-install-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.pwa-install-button,
+.pwa-install-close {
+  border: none;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.pwa-install-button {
+  min-width: 110px;
+  height: 40px;
+  padding: 0 14px;
+  border-radius: 8px;
+  background: #fbea80;
+  color: #0f0f15;
+  font-weight: 700;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.pwa-install-button:hover {
+  transform: translateY(-1px);
+  opacity: 0.9;
+}
+
+.pwa-install-close {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  transition: background 0.2s ease;
+}
+
+.pwa-install-close:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+@media (max-width: 680px) {
+  .pwa-install-banner {
+    --pwa-install-safe-bottom: 12px;
+    left: 10px;
+    right: 10px;
+    padding: 12px;
+    gap: 10px;
+    /* Em mobile a anime-nav é geralmente mais alta; ajustar se necessário */
+    bottom: calc(
+      var(--pwa-install-safe-bottom) +
+      env(safe-area-inset-bottom) +
+      72px
+    );
+  }
+
+  .pwa-install-text {
+    font-size: 0.90rem;
+  }
+
+  .pwa-install-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .pwa-install-button {
+    width: 100%;
+    min-width: 0;
+  }
+}

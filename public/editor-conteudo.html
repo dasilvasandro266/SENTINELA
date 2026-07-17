@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SENTINELA - Editor de Conteúdo</title>
+    <link rel="stylesheet" href="editor-conteudo.css" />
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon" />
+</head>
+<body>
+    <header class="topbar">
+        <a href="home.html" class="voltar">Voltar</a>
+        <h1>Editor de Conteúdo das Fases</h1>
+    </header>
+
+    <main class="layout">
+        <section class="card">
+            <h2>1) Texto de origem</h2>
+            <p>Escreva normalmente ou carregue ficheiro `.docx`, `.odt` ou `.txt`.</p>
+            <textarea id="textoFonte" placeholder="Escreva aqui..."></textarea>
+
+            <div class="acoes">
+                <input id="uploadArquivo" type="file" accept=".docx,.odt,.txt,.html,.htm,.doc" />
+                <button id="btnConverterTexto" type="button">Converter texto para HTML</button>
+            </div>
+
+            <small id="estadoUpload" class="estado"></small>
+        </section>
+
+        <section class="card">
+            <h2>2) HTML final para guardar no PostgreSQL</h2>
+            <p>Saída pronta para o campo <code>conteudoHtml</code>.</p>
+            <textarea id="htmlSaida" readonly></textarea>
+
+            <div class="acoes">
+                <button id="btnCopiarHtml" type="button">Copiar HTML</button>
+                <button id="btnAplicarClasses" type="button">Reaplicar classes SENTINELA</button>
+                <button id="btnInserirPageBreak" type="button">Inserir quebra de página</button>
+                <button id="btnInserirRodape" type="button">Inserir nota de rodapé</button>
+            </div>
+        </section>
+
+        <section class="card preview">
+            <h2>3) Pré-visualização</h2>
+            <div id="previewHtml" class="preview-area"></div>
+        </section>
+
+        <section class="card preview">
+            <h2>4) Guardar na fase</h2>
+            <p>Salve o conteúdo da fase na plataforma.</p>
+            <div class="form-grid">
+                <input id="campoDisciplina" type="text" placeholder="Disciplina" />
+                <input id="campoNome" type="text" placeholder="Nome (tema)" />
+                <input id="campoSubtema" type="text" placeholder="Subtema (fase)" />
+                <input id="campoAutores" type="text" list="listaAutores" placeholder="Autor(es) (separar por vírgula)" />
+            </div>
+            <datalist id="listaAutores"></datalist>
+            <div class="acoes">
+                <button id="btnSalvarConteudo" type="button">Guardar Conteúdo</button>
+                <button id="btnCopiarPayload" type="button">Copiar Payload (JSON)</button>
+            </div>
+            <small id="estadoSalvar" class="estado"></small>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+    <script type="module" src="editor-conteudo.js"></script>
+</body>
+</html>

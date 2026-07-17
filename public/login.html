@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SENTINELA - Login</title>
+    <link rel="stylesheet" href="auth.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body class="auth-page">
+    <div class="auth-background" aria-hidden="true">
+        <div class="auth-noise"></div>
+    </div>
+
+    <main class="auth-shell">
+        <section class="auth-card-wrap">
+            <div class="auth-card" data-tilt-card>
+                <div class="auth-card-content">
+                    <div class="brand-mark">S</div>
+                    <h1 class="auth-title">Bem-vindo de volta</h1>
+                    <p class="auth-subtitle">Inicie sessão para continuar no SENTINELA</p>
+
+                    <form id="loginForm" class="auth-form" novalidate>
+                        <div class="form-group">
+                            <label for="identificador">Email ou nome de usuário</label>
+                            <div class="input-wrap">
+                                <span class="input-icon" aria-hidden="true">@</span>
+                                <input type="text" id="identificador" placeholder="exemplo@email.com" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Senha</label>
+                            <div class="input-wrap">
+                                <span class="input-icon" aria-hidden="true">*</span>
+                                <input type="password" id="password" placeholder="Sua senha" required>
+                                <button type="button" class="password-toggle" data-password-toggle="password">Mostrar</button>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" id="loginSubmit">Entrar</button>
+                        <button type="button" class="btn btn-secondary" id="signupButton">Criar conta</button>
+
+                        <p id="error-message" class="status-message" aria-live="polite"></p>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="auth-ui.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>

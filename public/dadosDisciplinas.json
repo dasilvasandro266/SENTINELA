@@ -1,0 +1,194 @@
+{
+  "Direito Constitucional": [
+    {"nome": "teste", "subtemas": ["teste1"]}
+  ],
+  
+  "Introdução Ao Estudo Do Direito": [
+   {"nome": "I - A Necessidade Do Direito", "subtemas": ["Conceito de Direito", "Definição", "Princípios", "Fontes"]},
+   {"nome": "II - O Conceito De Direito", "subtemas": ["1. Direito Objectivo", "2. Direito Subjectivo", "3. Direito Positivo", "4. Direito Natural", "5. Direito Vigente"]},
+   {"nome": "III - Ordens Normativas", "subtemas": ["Temas polêmicos", "Reformas", "Legislação comparada"]},
+   {"nome": "IV - Realidades Afins", "subtemas": []},
+   {"nome": "V - Os Fins Do Direto", "subtemas": []},
+   {"nome": "VI - Fontes Do Direito", "subtemas": ["Sentidos da expressão", "A Lei", "Costume", "Jurisprudência", "Doutrina", "Princípios Gerais do Direito", "Equidade"]},
+   {"nome": "VII - A Norma Jurídica", "subtemas": ["Definição E Estrutura","Características Da Norma","Classificação Das Normas"]},
+   {"nome": "VIII - Tutela Das Normas Jurídicas", "subtemas": ["Justiça privada e pública", "Tutela preventiva e repressiva", "Eficácia"]},
+   {"nome": "IX - Sistemacidade Do Direito", "subtemas": ["Sistema jurídico", "Direito público e privado", "Direito público: Subclassificações", "Direito privado: Subclassificações", "Codificação"]},
+   {"nome": "X - Interpretação Da Lei", "subtemas": ["Hermenêutica jurídica", "Problemática da interpretação", "Classificação das formas  de interpretação"]},
+   {"nome": "XI - Integração Da Lei", "subtemas": ["Lacunas da lei", "Proibição de denegação da justiça", "Recurso à analogia", "A norma ad hoc"]},
+   {"nome": "XII - Aplicação Da Lei", "subtemas": ["Método silogístico", "Subsunção", "Limites externos", "Aplicação da lei no tempo"]}
+  ],
+
+   "Direito Internacional Público": [
+    {"nome": "", "subtemas":[]}
+  ],
+
+   "Teoria Geral Do Direito Civil": [
+    {"nome": "", "subtemas": []}
+  ],
+
+   "Direito Administrativo": [
+    {"nome": "I - A ORGANIZAÇÃO ADMINISTRATIVA", "subtemas": ["1. Elementos Da Organização Administrativa", "2. Os sistemas de Organização Administrativa", "3. A Administração Directa do Estado", "4. A Administração Indirecta do Estado", "5. A Administração Autónoma"]},
+    {"nome": "II - O PODER ADMINISTRATIVO", "subtemas": ["1. CONCEITOS FUNDAMENTAIS", "2. Procedimento Administrativo", "3. O Acto Administrativo", "4. Regulamento Administrativo", "5. Contratos Administrativos e Contratos Públicos"]},
+    {"nome": "", "subtemas": []},
+    {"nome": "", "subtemas": []},
+    {"nome": "", "subtemas": []},
+    {"nome": "", "subtemas": []},
+    {"nome": "", "subtemas": []},
+    {"nome": "", "subtemas": []},
+    {"nome": "", "subtemas": []},
+    {"nome": "", "subtemas": []},
+    {"nome": "", "subtemas": []},
+    {"nome": "", "subtemas": []},
+    {"nome": "", "subtemas": []},
+    {"nome": "", "subtemas": []},
+    {"nome": "", "subtemas": []},
+    {"nome": "", "subtemas": []},
+    {"nome": "", "subtemas": []},
+    {"nome": "", "subtemas": []},
+    {"nome": "", "subtemas": []},
+    {"nome": "", "subtemas": []}
+  ],
+   
+   "Finanças Públicas": [
+    {"nome": "Receitas Públicas", "subtemas": ["Tributos","Taxas","Contribuições"]}
+  ],
+
+  "Direito Económico": [
+    {"nome": "", "subtemas": []}
+  ],
+  
+  "Direito Processual Civil": [
+    {"nome": "I - Noções Gerais", "subtemas": ["Direito Processual Civil Como Ramo Do Direito", "Evolução Histórica E Fontes Do Direito Processual Civil", "O Objecto Do Processo: Noções Gerais Sobre O Pedido E A Causa De Pedir", "O Acesso À Justiça: A Justiça Pública"]},
+    {"nome": "II - Princípios Do Direito Processual Civil","subtemas": ["Os Princípios Estruturantes","Os Princípios Relativos À Promoção Processual","Os princípios relativos à prova","Os princípios relativos à prossecução processual"]},
+    { "nome": "III - Classificação Das Acções","subtemas": ["1. Quanto ao Fim: As Diferentes Espécies de Acções","2. Quanto à Forma: Processo Comum e Especial", "3. Providências Cautelares"]},
+    {"nome": "IV - Pressupostos Processuais", "subtemas": ["Introdução aos pressupostos processuais: Positivos e Negativos","1. Personalidade Judiciária","2. Capacidade Judiciária","3. Legitimidade: Modalidades, Intervenção de Terceiros e Modificações da instância","4. Interesse Processual","5. Patrocínio Judiciário","6. Sobre a competência dos tribunais","7. Os elementos do tribunal: Juiz, Ministério Público e Secretaria"]},
+    {"nome": "V - Do Processo Declarativo Ordinário", "subtemas": ["1. Petição Inicial", "2. Citação",  "3. Contestação", "4. Réplica e Tréplica", "5. Saneamento E Condensação Do Processo", "6. Da Instrução Do Processo", "7. Discussão e julgamento", "8. Sentença", "9. Dos Recursos"]},
+    {"nome": "VI - Do Processo Declarativo Sumário E Sumaríssimo", "subtemas": ["1. Da Tramitação do Processo Sumário", "2. Da Tramitação do Processo Sumaríssimo"]}
+  ],
+
+  "Direito Penal": [
+    {"nome": "I - Noções Gerais", "subtemas": []},
+    {"nome": "II - As Ciências Penais", "subtemas": []},
+    {"nome": "III - Fins Do Direito Penal", "subtemas": []},
+    {"nome": "IV - Contra-Ordenações E Contravenções", "subtemas": []},
+    {"nome": "V - Sobre A Legalidade Da Intervenção Penal", "subtemas": []},
+    {"nome": "VI - Aplicação Da Lei Penal No Tempo", "subtemas": ["1. Excepção A Não Retroactividade"]},
+    {"nome": "VII - Aplicação Da Lei Penal No Espaço", "subtemas": []},
+    {"nome": "VIII - Acção Penalmente Relevante", "subtemas": []},
+    {"nome": "IX - Facto Punível", "subtemas": []},
+    {"nome": "X - Culpabilidade", "subtemas": []},
+    {"nome": "XI - O Iter Criminis", "subtemas": []},
+    {"nome": "XII - Teoria Dos Agentes", "subtemas": ["1. Contextualização e concepção de autores", "2. Cumplicidade"]}
+  ],
+
+  "Direito Do Urbanismo": [
+    {
+      "nome": "I - Introdução ao direito do urbanismo",
+      "subtemas": [
+        "1. Noção, objecto e âmbito do direito do urbanismo",
+        "2. Fontes do direito do urbanismo"
+      ]
+    },
+    {
+      "nome": "II - Planeamento urbano",
+      "subtemas": [
+        "1. Instrumentos de planeamento urbano",
+        "2. Plano Director Municipal (PDM)",
+        "3. Plano de Pormenor (PP)",
+        "4. Plano de Urbanização (PU)"
+      ]
+    },
+    {
+      "nome": "III - Licenciamento urbanístico",
+      "subtemas": [
+        "1. Noção e tipos de licenciamento urbanístico",
+        "2. Procedimento de licenciamento urbanístico",
+        "3. Efeitos do licenciamento urbanístico"
+      ]
+    },
+    {
+      "nome": "IV - Protecção do património urbano",
+      "subtemas": [
+        "1. Património urbano: conceito e classificação",
+        "2. Medidas de protecção do património urbano",
+        "3. Sanções por infrações ao direito do urbanismo"
+      ]
+    }
+  ],
+
+  "Direito Do Ambiente": [
+    {
+      "nome": "I - Introdução ao direito do ambiente",
+      "subtemas": [
+        "1. Noção, objecto e âmbito do direito do ambiente",
+        "2. Fontes do direito do ambiente"
+      ]
+    },
+    {
+      "nome": "II - Princípios do direito do ambiente",
+      "subtemas": [
+        "1. Princípio da prevenção",
+        "2. Princípio do poluidor-pagador",
+        "3. Princípio da responsabilidade ambiental"
+      ]
+    },
+    {
+      "nome": "III - Instrumentos de gestão ambiental",
+      "subtemas": [
+        "1. Avaliação de Impacto Ambiental (AIA)",
+        "2. Licenciamento ambiental",
+        "3. Zoneamento ambiental"
+      ]
+    },
+    {
+      "nome": "IV - Protecção dos recursos naturais",
+      "subtemas": [
+        "1. Protecção da água",
+        "2. Protecção do solo",
+        "3. Protecção da biodiversidade"
+      ]
+    }
+  ],
+
+  "Direito Das Obrigações": [
+    {
+      "nome": "I - Introdução ao direito das obrigações",
+      "subtemas": [
+        "1. Noção, objecto e âmbito do direito das obrigações",
+        "2. Fontes do direito das obrigações"
+      ]
+    },
+    {
+      "nome": "II - Classificação das obrigações",
+      "subtemas": [
+        "1. Obrigações de dar, fazer e não fazer",
+        "2. Obrigações solidárias e divisíveis",
+        "3. Obrigações civis e comerciais"
+      ]
+    },
+    {
+      "nome": "III - Adimplemento e inadimplemento das obrigações",
+      "subtemas": [
+        "1. Adimplemento voluntário e involuntário",
+        "2. Mora do devedor e mora do credor",
+        "3. Consequências do inadimplemento"
+      ]
+    },
+    {
+      "nome": "IV - Extinção das obrigações",
+      "subtemas": [
+        "1. Pagamento ou cumprimento",
+        "2. Novação",
+        "3. Compensação"
+      ]
+    }
+  ],
+
+  "Direito Do Trabalho": [
+    {"nome": "I - Noções Introdutórias E Fontes Do Direito Do Trabalho","subtemas": ["1. Noção, objecto e âmbito do direito do trabalho","2. Fontes do direito do trabalho"]},
+    {"nome": "II - A Relação Jurídico-Laboral","subtemas": ["1. Contrato De Trabalho","2. Termo E Condição","3. Conteúdo Da Relação Jurídico-Laboral"]},
+    {"nome": "III - Formação do contrato de trabalho","subtemas": ["1. O processo de formação","2. Cláusulas essenciais do contrato de trabalho","3. Cláusulas acessórias do contrato de trabalho","4. Invalidade do contrato de trabalho","5. Peŕiodo experimental"]},
+    {"nome": "IV - Conteúdo da relação jurírico-laboral","subtemas": ["1. A atividade laboral e as suas modalidades","2. O trabalhador","3. O empregador","4. Local de trabalho"]},
+    {"nome": "V - Extinção do contrato de trabalho","subtemas": ["1. Modalidades de extinção","2. Rescisão por iniciativa do empregador","3. Rescisão por iniciativa do trabalhador","4. Rescisão por acordo entre as partes"]}
+  ]
+}

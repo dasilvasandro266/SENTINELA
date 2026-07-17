@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Painel de Administração | SENTINELA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/perfil.css">
+  <link rel="stylesheet" href="/admin/admin.css">
+  <link rel="stylesheet" href="/anime-nav.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+</head>
+<body class="has-anime-nav admin-page" data-feature="Admin">
+  <header class="anime-nav-wrap">
+    <nav class="anime-nav" id="animeNav">
+      <span class="anime-nav-glow" id="animeNavGlow" aria-hidden="true"></span>
+
+      <a href="/app/home" class="anime-nav-item" data-nav-item><i class="fa-solid fa-house"></i><span>Home</span></a>
+      <a href="/app/legislacao" class="anime-nav-item" data-nav-item><i class="fa-solid fa-scale-balanced"></i><span>Legislação</span></a>
+      <a href="/app/jurisprudencia" class="anime-nav-item" data-nav-item><i class="fa-solid fa-gavel"></i><span>Jurisprudência</span></a>
+      <a href="/app/perfil" class="anime-nav-item" data-nav-item><i class="fa-solid fa-user"></i><span>Perfil</span></a>
+    </nav>
+  </header>
+
+  <main class="perfil-shell admin-shell">
+    <section class="perfil-hero">
+      <div class="perfil-card admin-hero-card">
+        <div class="perfil-avatar" aria-hidden="true">A</div>
+        <div class="perfil-identity">
+          <p class="perfil-kicker">Gestão</p>
+          <h1>Painel de administração</h1>
+          <div class="perfil-badges">
+            <span class="badge" id="adminStatusBadge">A verificar sessão</span>
+          </div>
+        </div>
+        <div class="perfil-actions">
+          <a class="action-btn" href="/app/perfil">Voltar ao perfil</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="perfil-grid admin-grid">
+      <article class="perfil-panel admin-info-panel">
+        <h3>Hierarquia</h3>
+        <div class="admin-role-list">
+          <div>
+            <strong>Admin bootstrap</strong>
+            <span>Controle total, incluindo ceder e retirar qualquer privilégio.</span>
+          </div>
+          <div>
+            <strong>Admin geral</strong>
+            <span>Gere conteúdo, promove administradores e retira privilégios que tenha cedido.</span>
+          </div>
+          <div>
+            <strong>Gestão de conteúdo</strong>
+            <span>Faz upload, atualiza e elimina conteúdos, sem gerir administradores.</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="perfil-panel">
+        <h3>Promover conta</h3>
+        <p class="panel-hint">Use uma chave privada emitida por um administrador para ativar permissões administrativas nesta conta.</p>
+        <form id="formResgatarAdmin" class="stack-form">
+          <label for="chaveAdminInput">Chave privada</label>
+          <input id="chaveAdminInput" type="password" placeholder="Cole a chave privada aqui" autocomplete="off" />
+          <button type="submit">Resgatar chave</button>
+          <p id="mensagemAdminKey" class="form-message"></p>
+        </form>
+      </article>
+
+      <article class="perfil-panel" id="bootstrapPanel">
+        <h3>Bootstrap inicial</h3>
+        <p class="panel-hint" id="bootstrapHint">Disponível apenas enquanto ainda não existir uma conta administradora.</p>
+        <form id="formBootstrapAdmin" class="stack-form">
+          <label for="bootstrapAdminInput">Chave mestre</label>
+          <input id="bootstrapAdminInput" type="password" placeholder="Chave mestre de bootstrap" autocomplete="off" />
+          <button type="submit">Executar bootstrap</button>
+          <p id="mensagemBootstrapKey" class="form-message"></p>
+        </form>
+      </article>
+
+      <article class="perfil-panel admin-wide-panel" id="adminKeyGenerator" hidden>
+        <h3>Gerar chave privada</h3>
+        <p class="panel-hint">Gere uma chave para promover outro utilizador e defina o âmbito e a duração dos privilégios.</p>
+        <form id="formGerarAdminKey" class="stack-form">
+          <label for="roleAdminKeyInput">Tipo de administrador</label>
+          <select id="roleAdminKeyInput">
+            <option value="content">Gestão de conteúdo</option>
+            <option value="general">Administrador geral</option>
+          </select>
+          <label class="checkbox-row" for="indefiniteAdminKeyInput">
+            <input id="indefiniteAdminKeyInput" type="checkbox" />
+            <span>Privilégios por tempo indeterminado</span>
+          </label>
+          <label for="ttlAdminKeyInput">Validade (horas)</label>
+          <input id="ttlAdminKeyInput" type="number" min="1" value="24" placeholder="Validade em horas" />
+          <button type="submit">Gerar chave privada</button>
+          <p id="mensagemGerarAdminKey" class="form-message"></p>
+        </form>
+      </article>
+
+      <article class="perfil-panel admin-wide-panel" id="adminsListPanel" hidden>
+        <h3>Administradores</h3>
+        <p class="panel-hint">A despromoção respeita a cadeia de promoção: o promotor retira o que concedeu; o bootstrap pode intervir sempre.</p>
+        <div class="admin-table" id="adminsList"></div>
+      </article>
+
+      <article class="perfil-panel admin-wide-panel" id="auditPanel" hidden>
+        <h3>Histórico administrativo</h3>
+        <div class="admin-audit-list" id="adminAuditList"></div>
+      </article>
+    </section>
+  </main>
+
+  <script src="/home-nav.js"></script>
+  <script type="module" src="/admin/admin.js"></script>
+</body>
+</html>

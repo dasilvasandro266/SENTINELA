@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jurisprudência</title>
+    <link rel="stylesheet" href="jurisprudencia.css">
+    <link rel="stylesheet" href="global.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+</head>
+<body class="has-anime-nav" data-feature="Jurisprudência">
+
+    <header class="anime-nav-wrap">
+      <nav class="anime-nav" id="animeNav">
+        <span class="anime-nav-glow" id="animeNavGlow" aria-hidden="true"></span>
+
+        <a href="home.html" class="anime-nav-item" data-nav-item><i class="fa-solid fa-house"></i><span>Home</span></a>
+        <a href="legislacao.html" class="anime-nav-item" data-nav-item><i class="fa-solid fa-scale-balanced"></i><span>Legislação</span></a>
+        <a href="jurisprudencia.html" class="anime-nav-item is-active" data-nav-item><i class="fa-solid fa-gavel"></i><span>Jurisprudência</span></a>
+        <a href="perfil.html" class="anime-nav-item" data-nav-item><i class="fa-solid fa-user"></i><span>Perfil</span></a>
+      </nav>
+    </header>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main>
+        <section class="juris-hero-section">
+            <div class="juris-hero-shell">
+                <div class="juris-hero-card">
+                    <div class="juris-hero-dither" aria-hidden="true"></div>
+                    <div class="juris-hero-content">
+                        <div class="juris-hero-badge">
+                            <span class="dot-wrap">
+                                <span class="dot-ping"></span>
+                                <span class="dot-core"></span>
+                            </span>
+                            Artigo 1.º CP
+                        </div>
+                        <h1 class="juris-hero-title">Nullum crimen, nulla poena, sine lege. In claris non fit interpretatio.</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="importador-jurisprudencia" id="importadorJurisprudencia" hidden>
+            <h2>Registrar jurisprudência</h2>
+            <p>Importe `.pdf`, `.docx`, `.odt`, `.txt` ou `.html`, converta e guarde diretamente na base local.</p>
+
+            <div class="jp-editor-grid">
+                <div class="jp-editor-card">
+                    <h3>1) Texto de origem</h3>
+                    <textarea id="jpTextoFonte" placeholder="Escreva ou cole aqui..."></textarea>
+                    <div class="acoes">
+                        <input id="jpUploadArquivo" type="file" accept=".pdf,application/pdf,.docx,.odt,.txt,.html,.htm,.doc" />
+                        <button id="jpBtnConverterTexto" type="button">Converter para HTML</button>
+                    </div>
+                    <small id="jpEstadoUpload" class="estado"></small>
+                </div>
+
+                <div class="jp-editor-card">
+                    <h3>2) HTML final</h3>
+                    <textarea id="jpHtmlSaida" readonly></textarea>
+                    <div class="acoes">
+                        <button id="jpBtnCopiarHtml" type="button">Copiar HTML</button>
+                        <button id="jpBtnAplicarClasses" type="button">Reaplicar classes</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="jp-editor-card preview">
+                <h3>3) Pré-visualização</h3>
+                <div id="jpPreviewHtml" class="preview-area"></div>
+            </div>
+
+            <div class="jp-editor-card">
+                <h3>4) Guardar na base</h3>
+                <div class="form-grid">
+                    <input id="jpCampoTribunal" type="text" placeholder="Tribunal (ex: STF)" />
+                    <input id="jpCampoAno" type="number" placeholder="Ano" />
+                    <input id="jpCampoId" type="text" placeholder="ID/Processo (opcional)" />
+                    <input id="jpCampoNome" type="text" placeholder="Título" />
+                </div>
+                <textarea id="jpCampoReferencias" placeholder="Referências (opcional)"></textarea>
+                <div class="acoes">
+                    <button id="jpBtnSalvar" type="button">Guardar jurisprudência</button>
+                    <button id="jpBtnCopiarPayload" type="button">Copiar payload JSON</button>
+                </div>
+                <small id="jpEstadoSalvar" class="estado"></small>
+            </div>
+        </section>
+        <input type="text" id="search-bar" placeholder="Buscar jurisprudência...">
+        <div class="jurisprudência-container">
+            <!-- Container da animação de loading (sempre visível inicialmente) -->
+            <div id="loadingAnimation" class="loading-container">
+                <div class="container">
+                    <div class="slice"></div>
+                    <div class="slice"></div>
+                    <div class="slice"></div>
+                    <div class="slice"></div>
+                    <div class="slice"></div>
+                    <div class="slice"></div>
+                </div>
+                <p class="loading-text">Carregando jurisprudência...</p>
+            </div>
+            
+            <!-- Conteúdo será adicionado dinamicamente via JavaScript -->
+        </div>
+
+        <div id="jurisprudenciaModal" class="jurisprudencia-modal hidden" aria-hidden="true">
+            <div class="jurisprudencia-modal-content" role="dialog" aria-modal="true" aria-labelledby="jurisprudenciaModalTitulo">
+                <button id="fecharJurisprudenciaModal" class="jurisprudencia-modal-fechar" type="button" aria-label="Fechar">×</button>
+                <article class="modal-page jurisprudencia-modal-page">
+                    <header class="jurisprudencia-modal-header">
+                        <div id="jurisprudenciaModalMeta" class="jurisprudencia-modal-meta"></div>
+                        <h1 id="jurisprudenciaModalTitulo">Jurisprudência</h1>
+                        <p id="jurisprudenciaModalReferencia" class="referencia"></p>
+                    </header>
+                    <section id="jurisprudenciaModalTexto" class="page-content"></section>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <script src="home-nav.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+    <script type="module" src="jurisprudencia.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>SENTINELA - Home</title>
+    <link rel="stylesheet" href="home.css" />
+    <link rel="stylesheet" href="global.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet"/>
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="pwa-install.css" />
+</head>
+
+<body class="has-anime-nav" data-feature="Dashboard">
+
+    <!-- Navbar Principal -->
+    <header class="anime-nav-wrap">
+        <nav class="anime-nav" id="animeNav">
+            <span class="anime-nav-glow" id="animeNavGlow" aria-hidden="true"></span>
+
+            <a href="home.html" class="anime-nav-item is-active" data-nav-item>
+                <i class="fa-solid fa-house"></i>
+                <span>Home</span>
+            </a>
+            <a href="legislacao.html" class="anime-nav-item" data-nav-item>
+                <i class="fa-solid fa-scale-balanced"></i>
+                <span>Legislação</span>
+            </a>
+            <a href="jurisprudencia.html" class="anime-nav-item" data-nav-item>
+                <i class="fa-solid fa-gavel"></i>
+                <span>Jurisprudência</span>
+            </a>
+            <a href="perfil.html" class="anime-nav-item" data-nav-item>
+                <i class="fa-solid fa-user"></i>
+                <span>Perfil</span>
+            </a>
+        </nav>
+    </header>
+
+    <!-- Ícones de Notificação -->
+    <div class="top-icons">
+        <div class="notification-icon" id="notificationIcon" role="button" tabindex="0" aria-label="Abrir notificações">
+            <span class="notification-bell" aria-hidden="true">
+                <i class="fas fa-bell"></i>
+                <span class="notification-bell-pulse"></span>
+            </span>
+            <span class="notification-count" aria-label="Notificações não lidas" style="display:none;">0</span>
+        </div>
+    </div>
+
+    <!-- Conteúdo Principal -->
+    <main id="conteudoPrincipal">
+
+        <!-- Seção CTA -->
+        <section class="cta-section">
+            <div class="cta-shell">
+                <div class="cta-card">
+                    <div class="cta-dither" aria-hidden="true"></div>
+
+                    <div class="cta-content">
+                        <div class="cta-badge">
+                            <span class="dot-wrap">
+                                <span class="dot-ping"></span>
+                                <span class="dot-core"></span>
+                            </span>
+                            SENTINELA
+                        </div>
+
+                        <h2 class="cta-title">
+                            O direito numa nova<br>
+                            <span>dimensão.</span>
+                        </h2>
+
+                        <p class="cta-description">
+                            
+                        </p>
+
+                       <button class="cta-button" onclick="window.location.href='/app/acerca.html'">
+                            <span>Sobre Nós</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard -->
+        <section class="dashboard-container" id="dashboard">
+            <div class="carousel-header">
+                <h2>⚡ Acesso Rápido</h2>
+                <div class="carousel-controls">
+                    <button type="button" class="carousel-btn prev" data-carousel-btn="prev" data-carousel-target="dashboardTrack" aria-label="Anterior">‹</button>
+                    <button type="button" class="carousel-btn next" data-carousel-btn="next" data-carousel-target="dashboardTrack" aria-label="Seguinte">›</button>
+                </div>
+            </div>
+
+            <div class="dashboard-track carousel-track" id="dashboardTrack">
+                <div class="dashboard-card" id="ultimas-legislacoes">
+                    <h3>📚 Últimas legislações visitadas</h3>
+                    <ul></ul>
+                </div>
+
+                <div class="dashboard-card" id="jurisprudencia-recente">
+                    <h3>🧠 Jurisprudência recente</h3>
+                    <ul></ul>
+                </div>
+
+                <div class="dashboard-card" id="remissoes-recentes">
+                    <h3>🔗 Remissões criadas recentemente</h3>
+                    <div class="scroll-horizontal">
+                        <ul id="lista-remissoes"></ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Formação Jurídica -->
+        <section class="formacao-juridica">
+            <div class="carousel-header">
+                <h2>🎓 Formação Jurídica</h2>
+                <div class="carousel-controls">
+                    <button type="button" class="carousel-btn prev" data-carousel-btn="prev" data-carousel-target="niveis-container" aria-label="Anterior">‹</button>
+                    <button type="button" class="carousel-btn next" data-carousel-btn="next" data-carousel-target="niveis-container" aria-label="Seguinte">›</button>
+                </div>
+            </div>
+            <div class="niveis-container carousel-track" id="niveis-container"></div>
+        </section>
+
+        <!-- Modal de Etapas -->
+        <div id="etapasModal" class="hidden">
+            <div class="etapas-modal-content">
+                <h2 id="etapasModalTitle">Etapas</h2>
+                <div id="listaEtapas"></div>
+                <button id="btnFecharModal">Fechar</button>
+            </div>
+        </div>
+
+        <!-- SVG Mapa Interativo -->
+        <section id="svgMapaContainer" class="hidden">
+            <h2 id="svgMapaTitulo">Mapa de Planificação</h2>
+            <svg id="svgMapa" width="100%" height="600"></svg>
+            <button id="fecharSvgMapaBtn" aria-label="Fechar mapa">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                    <path d="M14 4L4 14M4 4l10 10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+                </svg>
+            </button>
+        </section>
+
+        <!-- Modal de Conteúdo da Fase -->
+        <div id="conteudoFaseModal" class="hidden">
+            <div class="conteudo-modal">
+                <h2 id="faseTitulo"></h2>
+                <div id="tab-conteudo"></div>
+
+                <button id="fecharConteudoBtn">Fechar</button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Hiromi (IA Jurídica) -->
+    <div class="hiromi-widget" id="hiromiWidget" aria-live="polite" hidden>
+        <button class="hiromi-toggle" id="hiromiToggle" type="button" aria-expanded="false" aria-controls="hiromiPanel">
+            <span class="hiromi-orb" aria-hidden="true">
+                <span class="hiromi-dot"></span>
+            </span>
+            <span class="hiromi-toggle-copy">
+                <strong>Hiromi</strong>
+                <span>IA juridica</span>
+            </span>
+        </button>
+
+        <section class="hiromi-panel" id="hiromiPanel" aria-hidden="true">
+            <button class="hiromi-close" id="hiromiClose" type="button" aria-label="Fechar Hiromi">×</button>
+
+            <div class="hiromi-shell">
+                <aside class="hiromi-sidebar">
+                    <div class="hiromi-brand-row">
+                        <span class="hiromi-brand">Hiromi</span>
+                        <span class="hiromi-brand-pill">Workspace 4.0</span>
+                    </div>
+                    <button type="button" class="hiromi-new-chat-btn" id="hiromiNewChat">Novo chat</button>
+                    <div class="hiromi-chat-list" id="hiromiChatList"></div>
+                </aside>
+
+                <div class="hiromi-main">
+                    <div class="hiromi-hero" id="hiromiHero">
+                        <div class="hiromi-logo">
+                            <span>Cogito, Ergo Sum</span>
+                            <small>Pesquisa juridica assistida com contexto do SENTINELA</small>
+                        </div>
+                    </div>
+
+                    <div class="hiromi-messages is-empty" id="hiromiMessages" role="log" aria-live="polite" aria-relevant="additions"></div>
+
+                    <form class="hiromi-input" id="hiromiForm">
+                        <input type="text" id="hiromiQuestion" name="hiromiQuestion" placeholder="Pergunte sobre legislação, jurisprudência ou formação" autocomplete="off" />
+                        <div class="hiromi-input-row">
+                            <div class="hiromi-input-left">
+                                <button type="button" class="hiromi-mini-btn" id="hiromiClearDraft" aria-label="Limpar pergunta">⟳</button>
+                            </div>
+                            <div class="hiromi-input-right">
+                                <button type="submit" id="hiromiSend" class="hiromi-send-btn" aria-label="Enviar pergunta">↑</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <p class="hiromi-disclaimer">A Hiromi pode falhar. Verifique sempre a base legal aplicável.</p>
+        </section>
+    </div>
+
+    <!-- Rodapé -->
+    <footer class="footer7">
+        <div class="footer7-container">
+            <div class="footer7-top">
+                <div class="footer7-brand">
+                    <a href="home.html" class="footer7-logo" aria-label="SENTINELA">
+                        <span class="footer7-logo-title">SENTINELA</span>
+                    </a>
+                    <ul class="footer7-social">
+                        <li><a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a></li>
+                        <li><a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a></li>
+                    </ul>
+                </div>
+
+                <div class="footer7-grid">
+                    <div>
+                        <h3>Produto</h3>
+                        <ul>
+                            <li><a href="legislacao.html">Legislação</a></li>
+                            <li><a href="jurisprudencia.html">Jurisprudência</a></li>
+                            <li><a href="sumários.html">Sumários</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Plataforma</h3>
+                        <ul>
+              <li><a href="/app/acerca.html">Acerca</a></li>
+                            <li><a href="editor-conteudo.html">Editor</a></li>
+                            <li><a href="/admin/admin.html">Painel de administração</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Suporte</h3>
+                        <ul>
+                            <li><a href="/app/contacto">Contacto</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer7-bottom">
+                <ul>
+                    <li><a href="/app/termos.html">Termos e Condições</a></li>
+                    <li><a href="/app/privacidade.html">Política de Privacidade</a></li>
+                </ul>
+                <p>&copy; 2026 SENTINELA. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="pwa-install.js"></script>
+    <script src="home-nav.js"></script>
+    <script type="module" src="authManager.js"></script>
+    <script type="module" src="authHelper.js"></script>
+    <script type="module" src="routes/home.js"></script>
+</body>
+</html>

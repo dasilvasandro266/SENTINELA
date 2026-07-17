@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Perfil do Usuário | SENTINELA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="perfil.css">
+  <link rel="stylesheet" href="global.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+</head>
+<body class="has-anime-nav" data-feature="App">
+  <header class="anime-nav-wrap">
+    <nav class="anime-nav" id="animeNav">
+      <span class="anime-nav-glow" id="animeNavGlow" aria-hidden="true"></span>
+
+      <a href="/app/home" class="anime-nav-item" data-nav-item>
+        <i class="fa-solid fa-house"></i>
+        <span>Home</span>
+      </a>
+      <a href="/app/legislacao" class="anime-nav-item" data-nav-item>
+        <i class="fa-solid fa-scale-balanced"></i>
+        <span>Legislação</span>
+      </a>
+      <a href="/app/jurisprudencia" class="anime-nav-item" data-nav-item>
+        <i class="fa-solid fa-gavel"></i>
+        <span>Jurisprudência</span>
+      </a>
+      <a href="/app/perfil" class="anime-nav-item" data-nav-item>
+        <i class="fa-solid fa-user"></i>
+        <span>Perfil</span>
+      </a>
+    </nav>
+  </header>
+
+  <main class="perfil-shell">
+    <section class="perfil-hero">
+      <div class="perfil-card">
+        <div class="perfil-avatar loading" id="avatarPerfil"></div>
+        <div class="perfil-identity">
+          <h1 id="nomeUsuario">...</h1>
+          <div class="perfil-badges">
+            <span class="badge" id="tipoContaBadge">Conta Usuário</span>
+          </div>
+        </div>
+        <div class="perfil-actions">
+          <button type="button" class="action-btn" id="logoutBtn">Terminar sessão</button>
+          <button type="button" class="action-btn danger" id="deleteAccountBtn">Eliminar conta</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="perfil-grid">
+      <article class="perfil-panel">
+        <h3>Detalhes da conta</h3>
+        <p class="panel-hint">Informação institucional associada à tua conta.</p>
+        <div class="meta-grid">
+          <div class="meta-item">
+            <span class="meta-label">Instituição</span>
+            <span class="meta-value" id="instituicao">...</span>
+          </div>
+        </div>
+        <form id="formAtualizar" class="stack-form profile-update-form">
+          <label for="novaInstituicao">Atualizar instituição</label>
+          <input id="novaInstituicao" type="text" placeholder="Nome da instituição" autocomplete="organization" />
+          <button type="submit">Guardar instituição</button>
+          <p id="mensagemAtualizacao" class="form-message"></p>
+        </form>
+        <div class="disciplinas-panel">
+          <span class="meta-label">Disciplinas seguidas</span>
+          <ul class="disciplinas-list" id="disciplinasSeguidas"></ul>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="footer7">
+    <div class="footer7-container">
+      <div class="footer7-top">
+        <div class="footer7-brand">
+          <a href="home.html" class="footer7-logo" aria-label="SENTINELA">
+            <span class="footer7-logo-title">SENTINELA</span>
+          </a>
+          <ul class="footer7-social">
+            <li><a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a></li>
+            <li><a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a></li>
+          </ul>
+        </div>
+
+        <div class="footer7-grid">
+          <div>
+            <h3>Produto</h3>
+            <ul>
+              <li><a href="legislacao.html">Legislação</a></li>
+              <li><a href="jurisprudencia.html">Jurisprudência</a></li>
+              <li><a href="sumários.html">Sumários</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3>Plataforma</h3>
+            <ul>
+              <li><a href="/app/acerca.html">Acerca</a></li>
+              <li><a href="editor-conteudo.html">Editor</a></li>
+              <li><a href="/admin/admin.html">Painel de administração</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3>Suporte</h3>
+            <ul>
+              <li><a href="/app/contacto">Contacto</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer7-bottom">
+        <ul>
+          <li><a href="/app/termos.html">Termos e Condições</a></li>
+          <li><a href="/app/privacidade.html">Política de Privacidade</a></li>
+        </ul>
+        <p>&copy; 2026 SENTINELA. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/home-nav.js"></script>
+  <script type="module" src="/perfil.js"></script>
+</body>
+</html>

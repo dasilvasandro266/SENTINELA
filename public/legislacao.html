@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legislação</title>
+    <link rel="stylesheet" href="legislacao.css">
+    <link rel="stylesheet" href="global.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+</head>
+<body class="has-anime-nav" data-feature="Legislação">
+    
+  <header class="anime-nav-wrap">
+    <nav class="anime-nav" id="animeNav">
+      <span class="anime-nav-glow" id="animeNavGlow" aria-hidden="true"></span>
+
+      <a href="home.html" class="anime-nav-item" data-nav-item><i class="fa-solid fa-house"></i><span>Home</span></a>
+      <a href="legislacao.html" class="anime-nav-item" data-nav-item><i class="fa-solid fa-gavel"></i><span>Legislação</span></a>
+      <a href="jurisprudencia.html" class="anime-nav-item" data-nav-item><i class="fa-solid fa-gavel"></i><span>Jurisprudência</span></a>
+      <a href="perfil.html" class="anime-nav-item" data-nav-item><i class="fa-solid fa-user"></i><span>Perfil</span></a>
+    </nav>
+  </header>
+    
+    <main>
+        <section id="Legislacao">
+<section class="legis-hero-section">
+  <div class="legis-hero-shell">
+    <div class="legis-hero-card">
+
+        <div class="hero-corner hero-corner-left">
+  220 Deputados
+</div>
+
+<div class="hero-corner hero-corner-right">
+  <div>LATITUDE: 8.8211° S</div>
+  <div>LONGITUDE: 13.2208° E</div>
+</div>
+
+      <!-- IMAGEM EM PERSPECTIVA -->
+      <div class="hero-perspective">
+        <img src="/images/assembleianacional.jpg" alt="Hero Image" class="hero-perspective-img">
+      </div>
+
+      <div class="legis-hero-dither" aria-hidden="true"></div>
+
+      <div class="legis-hero-content">
+        <div class="legis-hero-badge">
+          <span class="dot-wrap">
+            <span class="dot-ping"></span>
+            <span class="dot-core"></span>
+          </span>
+            Assembleia Nacional
+        </div>
+
+        <div class="hero-component">
+          <h1 class="hero-component-title">A Casa Das Leis</h1>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+            <section class="importador-legislacao" id="importadorLegislacao" hidden>
+                <h2>Registrar legislação</h2>
+                <p>Envie um arquivo JSON para guardar automaticamente no PostgreSQL.</p>
+                <div class="importador-actions">
+                    <input type="file" id="uploadLegislacaoJson" accept=".json,application/json">
+                    <button id="btnImportarLegislacao" type="button">Importar JSON</button>
+                </div>
+                <pre id="importStatus" class="import-status"></pre>
+            </section>
+
+            <input type="text" id="searchInput" placeholder="Buscar legislação...">
+            
+            <div class="legislacao-container">
+                <!-- Container da animação de loading (sempre visível inicialmente) -->
+                <div id="loadingAnimation" class="loading-container">
+                    <div class="container">
+                        <div class="slice"></div>
+                        <div class="slice"></div>
+                        <div class="slice"></div>
+                        <div class="slice"></div>
+                        <div class="slice"></div>
+                        <div class="slice"></div>
+                    </div>
+                    <p class="loading-text">Carregando legislação...</p>
+                </div>
+                
+                <!-- Conteúdo será adicionado dinamicamente via JavaScript -->
+            </div>
+        </section>        
+    </main>
+
+        <!-- Rodapé -->
+    <footer class="footer7">
+        <div class="footer7-container">
+            <div class="footer7-top">
+                <div class="footer7-brand">
+                    <a href="home.html" class="footer7-logo" aria-label="SENTINELA">
+                        <span class="footer7-logo-title">SENTINELA</span>
+                    </a>
+                    <ul class="footer7-social">
+                        <li><a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a></li>
+                        <li><a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a></li>
+                    </ul>
+                </div>
+
+                <div class="footer7-grid">
+                    <div>
+                        <h3>Produto</h3>
+                        <ul>
+                            <li><a href="legislacao.html">Legislação</a></li>
+                            <li><a href="jurisprudencia.html">Jurisprudência</a></li>
+                            <li><a href="sumários.html">Sumários</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Plataforma</h3>
+                        <ul>
+                            <li><a href="/app/acerca.html">Acerca</a></li>
+                            <li><a href="editor-conteudo.html">Editor</a></li>
+                            <li><a href="/admin/admin.html">Painel de administração</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Suporte</h3>
+                        <ul>
+                            <li><a href="/app/contacto">Contacto</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer7-bottom">
+                <ul>
+                    <li><a href="/app/termos.html">Termos e Condições</a></li>
+                    <li><a href="/app/privacidade.html">Política de Privacidade</a></li>
+                </ul>
+                <p>&copy; 2026 SENTINELA. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="home-nav.js"></script>
+    <script type="module" src="routes/legislacao.js"></script>
+    
+</body>
+</html>

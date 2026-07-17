@@ -1,0 +1,52 @@
+{
+  "Teoria_Geral_do_Direito": {
+      "nome": "Teoria Geral do Direito",
+      "Partes": {
+        "I": {
+          "titulo": "Fundamentos",
+          "Capítulos": {
+            "1": {
+              "titulo": "Conceito de Direito",
+              "Temas": {
+                "A": {
+                  "titulo": "Direito Natural",
+                  "conteudo": "O direito natural baseia-se na razão humana e valores universais."
+                },
+                "B": {
+                  "titulo": "Direito Positivo",
+                  "conteudo": "O direito positivo é aquele instituído pelo Estado por meio de normas escritas."
+                }
+              }
+            },
+            "2": {
+              "titulo": "Fontes do Direito",
+              "Temas": {
+                "A": {
+                  "titulo": "A Lei",
+                  "conteudo": "A lei é a fonte primária do Direito em sistemas jurídicos codificados."
+                },
+                "B": {
+                  "titulo": "A Jurisprudência",
+                  "conteudo": "A jurisprudência complementa a aplicação da lei por meio da interpretação judicial."
+                }
+              }
+            }
+          }
+        },
+        "II": {
+          "titulo": "Aplicação do Direito",
+          "Capítulos": {
+            "1": {
+              "titulo": "Interpretação Jurídica",
+              "Temas": {
+                "A": {
+                  "titulo": "Métodos de Interpretação",
+                  "conteudo": "Literal, sistemático, teleológico e histórico são métodos clássicos."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }

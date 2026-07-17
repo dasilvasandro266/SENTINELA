@@ -1,0 +1,59 @@
+:root {
+  --p1: #F5F0E6;
+  --p2: #F0E5D5;
+  --p6: #D2B48C;
+  --p8: #B69060;
+  --p10: #6B4F3A;
+  --p11: #4A3B2C;
+  --p12: #2C231C;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "times new roman", serif;
+  background: radial-gradient(circle at top, rgba(245, 240, 230, 0.12), transparent 55%),
+              linear-gradient(180deg, var(--p12), var(--p11));
+  color: var(--p1);
+  padding: 120px 24px 80px;
+}
+
+.legal-shell {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 32px;
+  border-radius: 20px;
+  background: rgba(44, 35, 28, 0.8);
+  border: 1px solid rgba(245, 240, 230, 0.12);
+  box-shadow: 0 20px 50px rgba(15, 15, 21, 0.45);
+}
+
+.legal-shell h1 {
+  margin-top: 0;
+  font-size: 28px;
+}
+
+.legal-shell h2 {
+  margin-top: 26px;
+  font-size: 18px;
+  color: var(--p2);
+}
+
+.legal-shell p,
+.legal-shell li {
+  color: rgba(245, 240, 230, 0.8);
+  line-height: 1.7;
+}
+
+.legal-shell ul {
+  padding-left: 20px;
+}
+
+.legal-meta {
+  margin-bottom: 24px;
+  color: rgba(245, 240, 230, 0.6);
+  font-size: 13px;
+}

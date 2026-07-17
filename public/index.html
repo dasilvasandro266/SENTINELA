@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SENTINELA</title>
+  <link rel="stylesheet" href="auth.css">
+  <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+  <meta name="description" content="O SENTINELA é uma plataforma especialmente criada para a consulta e o ensino de matérias jurídicas.">
+  <meta name="keywords" content="SENTINELA, Direito, Ensino, Jurídico">
+  <meta name="author" content="Sandro Da Silva">
+  <meta name="robots" content="index, follow">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="SENTINELA">
+  <meta name="theme-color" content="#4a3c2c">
+  <link rel="stylesheet" href="/pwa-install.css">
+</head>
+
+<body class="auth-page">
+  <div class="auth-shell">
+
+    <!-- ── PAINEL ESQUERDO (CARROSSEL) ── -->
+    <aside class="auth-panel-left" aria-hidden="true">
+
+      <!-- SLIDE 1 -->
+      <div class="panel-slide active" id="slide-0">
+        <div class="panel-texture"></div>
+        <div class="lema-glow"></div>
+        <div class="panel-brand">
+          <div class="panel-logo">
+            <div class="panel-logo-mark">S</div>
+            <span class="panel-logo-name">Sentinela</span>
+          </div>
+        </div>
+        <div class="panel-body lema-body">
+          <div class="lema-ornament">
+            <span></span><span class="lema-diamond">◆</span><span></span>
+          </div>
+          <h2 class="lema-headline">
+            O direito ao seu<br><em>alcance.</em>
+          </h2>
+          <div class="lema-rule"></div>
+          <p class="lema-sub">
+          </p>
+          <p class="lema-sub">
+          </p>
+        </div>
+        <div class="panel-footer">
+          <span class="panel-footer-badge">Por angolanos para angolanos</span>
+          <div class="panel-dots" id="panel-dots-0"></div>
+        </div>
+      </div>
+
+      <!-- SLIDE 2 — Lema  -->
+      <div class="panel-slide" id="slide-1">
+        <div class="panel-texture"></div>
+        <div class="lema-glow"></div>
+        <div class="panel-brand">
+          <div class="panel-logo">
+            <div class="panel-logo-mark">S</div>
+            <span class="panel-logo-name">Sentinela</span>
+          </div>
+        </div>
+        <div class="panel-body lema-body">
+          <div class="lema-ornament">
+            <span></span><span class="lema-diamond">◆</span><span></span>
+          </div>
+          <h2 class="lema-headline">
+            O Direito<br>Numa Nova<br><em>Dimensão</em>
+          </h2>
+          <div class="lema-rule"></div>
+          <p class="lema-sub">SENTINELA &mdash; 2026</p>
+        </div>
+        <div class="panel-footer">
+          <span class="panel-footer-badge">Uma nova dimensão</span>
+          <div class="panel-dots" id="panel-dots-1"></div>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- ── PAINEL DIREITO ── -->
+    <main class="auth-panel-right">
+      <div id="pwaInstallBanner" class="pwa-install-banner hidden" role="dialog" aria-live="polite">
+        <span class="pwa-install-text">Instale o app SENTINELA para acesso mais rápido e leitura offline.</span>
+        <div class="pwa-install-actions">
+          <button id="pwaInstallButton" class="pwa-install-button" type="button">Instalar app</button>
+          <button id="pwaInstallClose" class="pwa-install-close" type="button" aria-label="Fechar">×</button>
+        </div>
+      </div>
+      <div class="auth-form-wrap">
+
+        <header class="auth-form-header">
+          <h1 class="auth-title">Bem&#8209;vindo<br><em>de volta</em></h1>
+        </header>
+
+        <form id="loginForm" class="auth-form" novalidate>
+          <div class="form-group">
+            <label for="identificador">Email ou utilizador</label>
+            <div class="input-wrap">
+              <input type="text" id="identificador" placeholder="exemplo@email.com" autocomplete="username" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="password">Senha</label>
+            <div class="input-wrap">
+              <input type="password" id="password" placeholder="••••••••" autocomplete="current-password" required>
+              <button type="button" class="password-toggle" data-password-toggle="password">Mostrar</button>
+            </div>
+          </div>
+          <div class="auth-options">
+            <label class="checkbox-line" for="rememberMe">
+              <input id="rememberMe" type="checkbox">
+              Lembrar de mim
+            </label>
+            <a class="auth-link" href="#">Esqueci a senha</a>
+          </div>
+          <button type="submit" class="btn-primary" id="loginSubmit">Entrar na plataforma</button>
+          <p id="error-message" class="status-message" aria-live="polite"></p>
+          <div class="form-ornament">
+            <span class="form-ornament-line"></span>
+            <span class="form-ornament-text">Novo na plataforma?</span>
+            <span class="form-ornament-line"></span>
+          </div>
+          <p class="auth-footer-text">
+            <a href="cadastro.html">Criar conta gratuita</a>
+          </p>
+        </form>
+      </div>
+    </main>
+
+  </div>
+
+  <footer class="page-footer">
+    &copy; 2026 SENTINELA
+  </footer>
+
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#8B008B">
+  <script src="auth-ui.js"></script>
+  <script src="index.js"></script>
+  <script src="/pwa-install.js"></script>
+  <script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/service-worker.js')
+        .then((registration) => {
+          console.log('Service Worker registado:', registration.scope);
+        })
+        .catch((error) => {
+          console.warn('Falha ao registar Service Worker:', error);
+        });
+    });
+  }
+  // ── CARROSSEL DO PAINEL ESQUERDO (REFATORADO) ──
+  (function() {
+    const slides        = document.querySelectorAll('.panel-slide');
+    const totalSlides   = slides.length;
+    let currentSlide    = 0;
+    let autoTimer       = null;
+
+    // Armazena os containers de dots de cada slide
+    const dotsContainers = [];
+
+    // Inicializa: coleta os containers e gera os dots para cada slide
+    for (let i = 0; i < totalSlides; i++) {
+      const container = slides[i].querySelector('.panel-dots');
+      if (container) {
+        dotsContainers.push(container);
+      } else {
+        // fallback seguro (não deve acontecer)
+        const newContainer = document.createElement('div');
+        newContainer.className = 'panel-dots';
+        slides[i].querySelector('.panel-footer').appendChild(newContainer);
+        dotsContainers.push(newContainer);
+      }
+    }
+
+    // Função para atualizar os dots em TODOS os slides
+    function updateAllDots(activeIndex) {
+      for (let s = 0; s < totalSlides; s++) {
+        const container = dotsContainers[s];
+        if (!container) continue;
+        // Limpa o container atual
+        container.innerHTML = '';
+        // Cria os dots para este slide
+        for (let i = 0; i < totalSlides; i++) {
+          const dot = document.createElement('span');
+          dot.className = 'panel-dot' + (i === activeIndex ? ' active' : '');
+          dot.addEventListener('click', (function(index) {
+            return function() { goToSlide(index); };
+          })(i));
+          container.appendChild(dot);
+        }
+      }
+    }
+
+    // Função para trocar de slide
+    function goToSlide(index) {
+      if (index === currentSlide) return;
+      if (index < 0) index = 0;
+      if (index >= totalSlides) index = totalSlides - 1;
+
+      // Remove classe active do slide atual, adiciona leaving para transição
+      slides[currentSlide].classList.remove('active');
+      slides[currentSlide].classList.add('leaving');
+      setTimeout(() => slides[currentSlide].classList.remove('leaving'), 600);
+
+      // Atualiza slide atual
+      currentSlide = index;
+      slides[currentSlide].classList.add('active');
+
+      // Atualiza todos os dots de todos os slides
+      updateAllDots(currentSlide);
+    }
+
+    // Avança para o próximo slide (loop infinito)
+    function nextSlide() {
+      let next = currentSlide + 1;
+      if (next >= totalSlides) next = 0;
+      goToSlide(next);
+    }
+
+    // Inicia o timer automático
+    function startAutoTimer() {
+      if (autoTimer) clearInterval(autoTimer);
+      autoTimer = setInterval(nextSlide, 5500);
+    }
+
+    // Para o timer automático
+    function stopAutoTimer() {
+      if (autoTimer) {
+        clearInterval(autoTimer);
+        autoTimer = null;
+      }
+    }
+
+    // Configura o estado inicial
+    function initCarousel() {
+      // Garante que apenas o primeiro slide está ativo no começo
+      for (let i = 0; i < totalSlides; i++) {
+        if (i === 0) slides[i].classList.add('active');
+        else slides[i].classList.remove('active');
+        slides[i].classList.remove('leaving');
+      }
+      currentSlide = 0;
+      updateAllDots(0);
+      startAutoTimer();
+
+      // Pausa no hover da área esquerda (mouse entra = pausa, mouse sai = retoma)
+      const panelLeft = document.querySelector('.auth-panel-left');
+      if (panelLeft) {
+        panelLeft.addEventListener('mouseenter', stopAutoTimer);
+        panelLeft.addEventListener('mouseleave', startAutoTimer);
+      }
+    }
+
+    initCarousel();
+  })();
+  </script>
+</body>
+</html>

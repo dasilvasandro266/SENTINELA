@@ -1,0 +1,1031 @@
+/* ============================================= */
+/* ESTILOS GERAIS - PALETA ALINHADA COM HOME */
+/* ============================================= */
+:root {
+  --p1: #F5F0E6;
+  --p2: #F0E5D5;
+  --p3: #E8DCCC;
+  --p4: #E0D0B8;
+  --p5: #D8C4A8;
+  --p6: #D2B48C;
+  --p7: #C4A27A;
+  --p8: #B69060;
+  --p9: #8B7355;
+  --p10: #6B4F3A;
+  --p11: #4A3B2C;
+  --p12: #2C231C;
+  --p13: #FFFFFF;
+  --p14: #D9C5AD;
+  --p15: #F5F0E6;
+  --p16: #DCC3A1;
+  --p17: #204b5e;
+  --p18: #426b65;
+  --p19: #baab6a;
+  --p20: #fbea80;
+  --p21: #fdfac7;
+  --p22: #0f0f15;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Times New Roman', Times, serif;
+  margin: 0;
+  padding: 0;
+  background: var(--p16);
+  color: var(--p1);
+  padding-top: 92px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* ============================================= */
+/* HERO (SUBSTITUI HEADER-CONTAINER) */
+/* ============================================= */
+.legis-hero-section {
+  padding: 1rem 0.5rem 2rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.legis-hero-shell {
+  width: 100%;
+  max-width: 1240px;
+}
+
+.legis-hero-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 360px;
+  border-radius: 40px;
+  border: 1px solid rgba(245, 240, 230, 0.16);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 20% 20%, rgba(210, 180, 140, 0.2), transparent 42%),
+              linear-gradient(145deg, rgba(74, 59, 44, 0.94), rgba(44, 35, 28, 0.96));
+}
+
+.legis-hero-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(150deg, rgba(42, 35, 28, 0.66), rgba(28, 23, 18, 0.78));
+  z-index: 1;
+  pointer-events: none;
+}
+
+.legis-hero-dither {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.26;
+  mix-blend-mode: overlay;
+  background: radial-gradient(circle at 25% 18%, rgba(210, 180, 140, 0.38), transparent 42%),
+              radial-gradient(circle at 76% 72%, rgba(245, 240, 230, 0.24), transparent 46%),
+              repeating-linear-gradient(45deg, rgba(210, 180, 140, 0.12) 0 2px, transparent 2px 5px);
+  animation: ditherFlow 12s linear infinite;
+}
+
+.legis-hero-content {
+  position: relative;
+  z-index: 3;
+  max-width: 960px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1.25rem;
+}
+
+.legis-hero-badge {
+  margin-bottom: 1.4rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  border-radius: 999px;
+  border: 1px solid rgba(210, 180, 140, 0.28);
+  background: rgba(42, 35, 28, 0.6);
+  color: var(--p1);
+  backdrop-filter: blur(4px);
+  font-size: 0.86rem;
+  font-weight: 600;
+  padding: 0.45rem 0.95rem;
+}
+
+.dot-wrap {
+  position: relative;
+  display: inline-flex;
+  width: 8px;
+  height: 8px;
+}
+
+.dot-core {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--p6);
+}
+
+.dot-ping {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(210, 180, 140, 0.76);
+  animation: ping 1.9s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.hero-component {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem;
+  border-radius: 18px;
+  border: 1px solid rgba(245, 240, 230, 0.2);
+  background: rgba(44, 35, 28, 0.5);
+  box-shadow: inset 0 0 14px rgba(245, 240, 230, 0.08);
+  width: min(500px, 100%);
+}
+
+.hero-component-title {
+  margin: 0;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  line-height: 1.06;
+  letter-spacing: -0.01em;
+  color: var(--p1);
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
+}
+
+.hero-component-count {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 2.7rem);
+  font-weight: 700;
+  color: var(--p6);
+  text-shadow: 0 0 10px rgba(210, 180, 140, 0.3);
+}
+
+.hero-component-actions {
+  display: flex;
+  gap: 0.7rem;
+}
+
+.hero-counter-btn {
+  border: none;
+  border-radius: 999px;
+  min-width: 54px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--p12);
+  background: var(--p1);
+  cursor: pointer;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, background-color 0.22s ease;
+  border: 1px solid rgba(210, 180, 140, 0.3);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.hero-counter-btn:hover {
+  background: var(--p6);
+  transform: scale(1.04);
+  box-shadow: 0 10px 24px rgba(210, 180, 140, 0.3);
+}
+
+/* ============================================= */
+/* HERO IMAGE EM PERSPECTIVA */
+/* ============================================= */
+
+.hero-perspective {
+  position: absolute;
+  width: 70%;
+  right: +8%;
+  bottom: -10%;
+  transform: perspective(1200px) rotateX(55deg) rotateZ(-18deg);
+  transform-origin: center;
+  z-index: 0;
+  opacity: 0.9;
+  animation: heroFloat 12s ease-in-out infinite;
+}
+
+@keyframes heroFloat {
+  0% { transform: perspective(1200px) rotateX(55deg) rotateZ(-18deg) translateY(0px); }
+  50% { transform: perspective(1200px) rotateX(55deg) rotateZ(-18deg) translateY(-10px); }
+  100% { transform: perspective(1200px) rotateX(55deg) rotateZ(-18deg) translateY(0px); }
+}
+
+.hero-perspective-img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(100%) contrast(1.1);
+  border-radius: 8px;
+  box-shadow:
+    0 30px 80px rgba(0,0,0,0.6),
+    0 0 40px rgba(0,0,0,0.4);
+}
+
+@media (max-width: 760px) {
+  main {
+    padding: 12px;
+  }
+
+  .legis-hero-section {
+    padding: 0.5rem 0 1.25rem;
+  }
+
+  .legis-hero-card {
+    min-height: 430px;
+    border-radius: 24px;
+    align-items: flex-end;
+  }
+
+  .hero-perspective {
+    width: 118%;
+    right: -22%;
+    bottom: 42%;
+    transform: perspective(900px) rotateX(26deg) rotateZ(-8deg);
+    opacity: 0.82;
+  }
+
+  @keyframes heroFloat {
+    0% { transform: perspective(900px) rotateX(26deg) rotateZ(-8deg) translateY(0); }
+    50% { transform: perspective(900px) rotateX(26deg) rotateZ(-8deg) translateY(-8px); }
+    100% { transform: perspective(900px) rotateX(26deg) rotateZ(-8deg) translateY(0); }
+  }
+
+  .hero-perspective-img {
+    aspect-ratio: 4 / 3;
+    min-height: 220px;
+  }
+
+  .legis-hero-content {
+    padding: 1rem;
+  }
+
+  .hero-component {
+    width: min(100%, 340px);
+    padding: 0.9rem;
+  }
+
+  .hero-corner-left {
+    left: 18px;
+    bottom: 18px;
+  }
+
+  .hero-corner-right {
+    top: 18px;
+    right: 18px;
+    max-width: 160px;
+  }
+}
+
+/* ============================================= */
+/* HERO CANTO INFO */
+/* ============================================= */
+
+.hero-corner{
+  position:absolute;
+  font-family: monospace;
+  font-size:12px;
+  letter-spacing:1px;
+  color:#ff5a2c;
+  z-index:5;
+  opacity:0.85;
+}
+
+.hero-corner-left{
+  bottom:24px;
+  left:28px;
+}
+
+.hero-corner-right{
+  top:24px;
+  right:28px;
+  text-align:right;
+  line-height:1.6;
+}
+
+.hero-corner{
+  text-shadow:
+  0 0 8px rgba(255,90,44,0.6),
+  0 0 14px rgba(255,90,44,0.3);
+}
+
+/* ============================================= */
+/* FORMULARIO E BUSCA */
+/* ============================================= */
+.importador-legislacao {
+  width: min(980px, 96%);
+  margin: 0 auto 1rem;
+  border-radius: 16px;
+  border: 1px solid rgba(210, 180, 140, 0.26);
+  background: radial-gradient(circle at top, rgba(139, 115, 85, 0.55), rgba(74, 59, 44, 0.92));
+  box-shadow: 0 18px 40px rgba(74, 59, 44, 0.4), inset 0 0 20px rgba(245, 240, 230, 0.06);
+  padding: 1rem;
+}
+
+.importador-legislacao h2 {
+  margin: 0 0 0.4rem;
+  font-size: 1.2rem;
+  color: var(--p1);
+}
+
+.importador-legislacao p {
+  margin: 0 0 0.8rem;
+  color: var(--p2);
+}
+
+.importador-actions {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+#uploadLegislacaoJson {
+  flex: 1 1 280px;
+  max-width: 100%;
+  color: var(--p1);
+}
+
+#btnImportarLegislacao {
+  border: 1px solid rgba(210, 180, 140, 0.5);
+  background: linear-gradient(90deg, var(--p1), var(--p6));
+  color: var(--p11);
+  font-weight: 700;
+  padding: 0.55rem 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+#btnImportarLegislacao:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.import-status {
+  margin: 0.8rem 0 0;
+  min-height: 1.2rem;
+  color: var(--p2);
+  white-space: pre-wrap;
+}
+
+#searchInput {
+  width: min(980px, 96%);
+  margin: 1.2rem auto 1.8rem;
+  display: block;
+  padding: 0.9rem 1rem;
+  border-radius: 14px;
+  border: 1px solid rgba(210, 180, 140, 0.32);
+  background: linear-gradient(145deg, rgba(74, 59, 44, 0.95), rgba(44, 35, 28, 0.95));
+  color: var(--p1);
+  transition: box-shadow 0.25s ease, border-color 0.25s ease;
+  outline: none;
+}
+
+#searchInput:focus {
+  border-color: var(--p6);
+  box-shadow: 0 0 0 4px rgba(210, 180, 140, 0.22);
+}
+
+#searchInput::placeholder {
+  color: var(--p3);
+}
+
+/* ============================================= */
+/* LISTA DE LEGISLACAO */
+/* ============================================= */
+main .legislacao-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.2rem;
+  padding: 0.4rem 0.2rem 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.legislacao-item {
+  position: relative;
+  background: var(--p10);
+  backdrop-filter: blur(6px);
+  padding: 1rem 1.2rem;
+  border-radius: 16px;
+  border: 1px solid rgba(210, 180, 140, 0.15);
+  color: var(--p1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.legislacao-item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  padding: 2px;
+  background: linear-gradient(120deg, transparent 45%, var(--p1) 55%, var(--p6) 65%, var(--p9) 75%, transparent 100%);
+  background-size: 200% 200%;
+  animation: borderGlow 3.2s linear infinite;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.legislacao-item h2,
+.legislacao-item h3 {
+  margin: 0 0 0.35rem;
+  line-height: 1.3;
+  font-weight: 700;
+  color: var(--p1);
+  text-align: left;
+}
+
+.legislacao-item .meta,
+.legislacao-item p {
+  color: var(--p3);
+}
+
+.legislacao-item:hover {
+  transform: translateY(-3px) scale(1.01);
+  box-shadow: 0 0 25px rgba(210, 180, 140, 0.3);
+}
+
+.btn-eliminar-legislacao {
+  margin-top: 0.7rem;
+  border: 1px solid #b67060;
+  background: #3e2a1f;
+  color: #fbe8d8;
+  border-radius: 10px;
+  padding: 0.35rem 0.7rem;
+  cursor: pointer;
+  font-size: 0.86rem;
+}
+
+.btn-eliminar-legislacao:hover {
+  background: #59402f;
+  box-shadow: 0 0 0 3px rgba(182, 112, 96, 0.2);
+}
+
+.legislacao-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid rgba(210, 180, 140, 0.24);
+  background: rgba(245, 240, 230, 0.08);
+  color: var(--p1);
+  font-size: 0.72rem;
+  line-height: 1;
+  margin-right: 0.35rem;
+}
+
+mark.hl {
+  background: rgba(210, 180, 140, 0.35);
+  color: var(--p13);
+  padding: 0 0.15em;
+  border-radius: 4px;
+}
+
+.legislacao-item {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.legislacao-item.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* ============================================= */
+/* ELEMENTOS ADICIONAIS */
+/* ============================================= */
+.empty {
+  padding: 2rem;
+  border: 1px dashed rgba(210, 180, 140, 0.4);
+  border-radius: 16px;
+  text-align: center;
+  color: var(--p2);
+  margin: 1rem;
+  background: linear-gradient(145deg, rgba(74, 59, 44, 0.9), rgba(44, 35, 28, 0.95));
+  grid-column: 1 / -1;
+}
+
+.toast {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--p12);
+  border: 1px solid var(--p6);
+  padding: 0.75rem 1.25rem;
+  border-radius: 16px;
+  color: var(--p1);
+  box-shadow: 0 0 14px rgba(210, 180, 140, 0.3);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s;
+  z-index: 50;
+}
+
+.toast.show {
+  opacity: 1;
+}
+
+/* ============================================= */
+/* ANIMACAO DE LOADING */
+/* ============================================= */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 0;
+  margin: 2rem auto;
+  max-width: 1200px;
+  min-height: 300px;
+  grid-column: 1 / -1;
+}
+
+.loading-text {
+  margin-top: 1.5rem;
+  color: var(--p2);
+  font-size: 1.1rem;
+  text-align: center;
+  animation: pulse 2s infinite;
+}
+
+.container {
+  --uib-size: 45px;
+  --uib-color: var(--p6);
+  --uib-speed: 2.5s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: var(--uib-size);
+  width: var(--uib-size);
+}
+
+.slice {
+  position: relative;
+  height: calc(var(--uib-size) / 6);
+  width: 100%;
+}
+
+.slice::before,
+.slice::after {
+  --uib-a: calc(var(--uib-speed) / -2);
+  --uib-b: calc(var(--uib-speed) / -6);
+  content: '';
+  position: absolute;
+  top: 0;
+  left: calc(50% - var(--uib-size) / 12);
+  height: 100%;
+  width: calc(100% / 6);
+  border-radius: 50%;
+  background-color: var(--uib-color);
+  flex-shrink: 0;
+  animation: orbit var(--uib-speed) linear infinite;
+  transition: background-color 0.3s ease;
+}
+
+.slice:nth-child(1)::after { animation-delay: var(--uib-a); }
+.slice:nth-child(2)::before { animation-delay: var(--uib-b); }
+.slice:nth-child(2)::after { animation-delay: calc(var(--uib-a) + var(--uib-b)); }
+.slice:nth-child(3)::before { animation-delay: calc(var(--uib-b) * 2); }
+.slice:nth-child(3)::after { animation-delay: calc(var(--uib-a) + var(--uib-b) * 2); }
+.slice:nth-child(4)::before { animation-delay: calc(var(--uib-b) * 3); }
+.slice:nth-child(4)::after { animation-delay: calc(var(--uib-a) + var(--uib-b) * 3); }
+.slice:nth-child(5)::before { animation-delay: calc(var(--uib-b) * 4); }
+.slice:nth-child(5)::after { animation-delay: calc(var(--uib-a) + var(--uib-b) * 4); }
+.slice:nth-child(6)::before { animation-delay: calc(var(--uib-b) * 5); }
+.slice:nth-child(6)::after { animation-delay: calc(var(--uib-a) + var(--uib-b) * 5); }
+
+.no-content .loading-container {
+  min-height: 60vh;
+  display: flex;
+}
+
+.no-content .legislacao-container {
+  display: none !important;
+}
+
+/* ============================================= */
+/* FOOTER 7 */
+/* ============================================= */
+.footer7 {
+    padding: 48px 20px 24px;
+}
+
+.footer7-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    border-radius: 20px;
+    border: 2px solid rgba(210, 180, 140, 0.3);
+    background: linear-gradient(145deg, #4A3B2C, #2C231C);
+    box-shadow:
+        0 18px 40px rgba(0, 0, 0, 0.6),
+        0 0 30px rgba(210, 180, 140, 0.2),
+        inset 0 0 30px rgba(245, 240, 230, 0.06);
+    overflow: hidden;
+    position: relative;
+}
+
+.footer7-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #D2B48C, #F5F0E6, #D2B48C, transparent);
+    z-index: 2;
+}
+
+.footer7-container::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #D2B48C, transparent);
+    opacity: 0.5;
+    z-index: 2;
+}
+
+.footer7-top {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    gap: 38px;
+    padding: 30px 28px 22px;
+    position: relative;
+    z-index: 3;
+    background: rgba(74, 59, 44, 0.6);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(210, 180, 140, 0.15);
+}
+
+.footer7-brand {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.footer7-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: #D2B48C;
+    text-decoration: none;
+    background: rgba(74, 59, 44, 0.5);
+    padding: 8px 16px;
+    border-radius: 40px;
+    border: 1px solid rgba(210, 180, 140, 0.2);
+    transition: all 0.3s ease;
+}
+
+.footer7-logo:hover {
+    border-color: #D2B48C;
+    box-shadow: 0 0 20px rgba(210, 180, 140, 0.3);
+}
+
+.footer7-logo-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    color: #F5F0E6;
+}
+
+.footer7-social {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.footer7-social a {
+    color: #D2B48C;
+    font-size: 1.1rem;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(74, 59, 44, 0.5);
+    border: 1px solid rgba(210, 180, 140, 0.2);
+}
+
+.footer7-social a:hover {
+    color: #4A3B2C;
+    background: #F5F0E6;
+    border-color: #D2B48C;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(210, 180, 140, 0.4);
+}
+
+.footer7-grid {
+    width: 100%;
+    display: grid;
+    gap: 22px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.footer7-grid h3 {
+    margin: 0 0 12px;
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: #D2B48C;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.footer7-grid h3::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    background: linear-gradient(90deg, #F5F0E6, #D2B48C);
+    border-radius: 2px;
+}
+
+.footer7-grid ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 10px;
+}
+
+.footer7-grid a {
+    color: #F5F0E6;
+    text-decoration: none;
+    font-size: 0.88rem;
+    transition: all 0.2s ease;
+    display: inline-block;
+    position: relative;
+    padding-left: 15px;
+}
+
+.footer7-grid a::before {
+    content: "›";
+    position: absolute;
+    left: 0;
+    color: #D2B48C;
+    font-size: 1.2rem;
+    line-height: 1;
+    transition: transform 0.2s ease;
+}
+
+.footer7-grid a:hover {
+    color: #D2B48C;
+    transform: translateX(5px);
+}
+
+.footer7-grid a:hover::before {
+    transform: translateX(3px);
+}
+
+.footer7-bottom {
+    margin-top: 8px;
+    border-top: 1px solid rgba(210, 180, 140, 0.15);
+    padding: 16px 28px 18px;
+    color: #D2B48C;
+    font-size: 0.78rem;
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 8px;
+    background: rgba(44, 35, 28, 0.8);
+    backdrop-filter: blur(5px);
+    position: relative;
+    z-index: 3;
+}
+
+.footer7-bottom p {
+    margin: 0;
+    color: #F5F0E6;
+}
+
+.footer7-bottom ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    gap: 16px;
+}
+
+.footer7-bottom a {
+    color: #D2B48C;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    padding: 4px 8px;
+    border-radius: 4px;
+    background: rgba(74, 59, 44, 0.3);
+}
+
+.footer7-bottom a:hover {
+    color: #4A3B2C;
+    background: #F5F0E6;
+    box-shadow: 0 2px 8px rgba(210, 180, 140, 0.3);
+}
+
+/* Efeito de destaque adicional */
+.footer7-container:hover {
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.7),
+        0 0 40px rgba(210, 180, 140, 0.3),
+        inset 0 0 30px rgba(245, 240, 230, 0.1);
+    border-color: rgba(210, 180, 140, 0.5);
+}
+
+/* ============================================= */
+/* RESPONSIVIDADE */
+/* ============================================= */
+@media (max-width: 768px) {
+  body {
+    padding-top: 88px;
+  }
+
+  main {
+    padding: 14px;
+  }
+
+  .legis-hero-section {
+    padding-top: 0.5rem;
+  }
+
+  .legis-hero-card {
+    min-height: 310px;
+    border-radius: 26px;
+  }
+
+  .hero-component {
+    padding: 1rem;
+  }
+
+  .hero-component-actions {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hero-counter-btn {
+    flex: 1;
+    max-width: 120px;
+  }
+}
+
+/* ============================================= */
+/* KEYFRAMES */
+/* ============================================= */
+@keyframes ditherFlow {
+  0% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(-2%, 1%, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+@keyframes ping {
+  75%,
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+@keyframes borderGlow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+@keyframes pulse {
+  0% { opacity: 0.7; }
+  50% { opacity: 1; }
+  100% { opacity: 0.7; }
+}
+
+@keyframes orbit {
+  0% {
+    transform: translateX(calc(var(--uib-size) * 0.25)) scale(0.73684);
+    opacity: 0.65;
+  }
+  5% {
+    transform: translateX(calc(var(--uib-size) * 0.235)) scale(0.684208);
+    opacity: 0.58;
+  }
+  10% {
+    transform: translateX(calc(var(--uib-size) * 0.182)) scale(0.631576);
+    opacity: 0.51;
+  }
+  15% {
+    transform: translateX(calc(var(--uib-size) * 0.129)) scale(0.578944);
+    opacity: 0.44;
+  }
+  20% {
+    transform: translateX(calc(var(--uib-size) * 0.076)) scale(0.526312);
+    opacity: 0.37;
+  }
+  25% {
+    transform: translateX(0%) scale(0.47368);
+    opacity: 0.3;
+  }
+  30% {
+    transform: translateX(calc(var(--uib-size) * -0.076)) scale(0.526312);
+    opacity: 0.37;
+  }
+  35% {
+    transform: translateX(calc(var(--uib-size) * -0.129)) scale(0.578944);
+    opacity: 0.44;
+  }
+  40% {
+    transform: translateX(calc(var(--uib-size) * -0.182)) scale(0.631576);
+    opacity: 0.51;
+  }
+  45% {
+    transform: translateX(calc(var(--uib-size) * -0.235)) scale(0.684208);
+    opacity: 0.58;
+  }
+  50% {
+    transform: translateX(calc(var(--uib-size) * -0.25)) scale(0.73684);
+    opacity: 0.65;
+  }
+  55% {
+    transform: translateX(calc(var(--uib-size) * -0.235)) scale(0.789472);
+    opacity: 0.72;
+  }
+  60% {
+    transform: translateX(calc(var(--uib-size) * -0.182)) scale(0.842104);
+    opacity: 0.79;
+  }
+  65% {
+    transform: translateX(calc(var(--uib-size) * -0.129)) scale(0.894736);
+    opacity: 0.86;
+  }
+  70% {
+    transform: translateX(calc(var(--uib-size) * -0.076)) scale(0.947368);
+    opacity: 0.93;
+  }
+  75% {
+    transform: translateX(0%) scale(1);
+    opacity: 1;
+  }
+  80% {
+    transform: translateX(calc(var(--uib-size) * 0.076)) scale(0.947368);
+    opacity: 0.93;
+  }
+  85% {
+    transform: translateX(calc(var(--uib-size) * 0.129)) scale(0.894736);
+    opacity: 0.86;
+  }
+  90% {
+    transform: translateX(calc(var(--uib-size) * 0.182)) scale(0.842104);
+    opacity: 0.79;
+  }
+  95% {
+    transform: translateX(calc(var(--uib-size) * 0.235)) scale(0.789472);
+    opacity: 0.72;
+  }
+  100% {
+    transform: translateX(calc(var(--uib-size) * 0.25)) scale(0.73684);
+    opacity: 0.65;
+  }
+}

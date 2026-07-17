@@ -1,0 +1,155 @@
+/* Navbar compartilhada entre páginas principais */
+body.has-anime-nav {
+  padding-top: 92px !important;
+}
+
+.anime-nav-wrap {
+  position: fixed;
+  top: 18px;
+  left: 0;
+  right: 0;
+  z-index: 10000;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.anime-nav {
+  pointer-events: auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.48);
+  backdrop-filter: blur(12px);
+  box-shadow:
+    0 8px 30px rgba(0, 0, 0, 0.45),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+.anime-nav-glow {
+  position: absolute;
+  top: 8px;
+  bottom: 8px;
+  left: 0;
+  width: 88px;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0.18) 40%, rgba(255, 255, 255, 0.08) 100%),
+    linear-gradient(130deg, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0.16));
+  box-shadow:
+    0 0 12px rgba(255, 255, 255, 0.28),
+    0 0 24px rgba(255, 255, 255, 0.16),
+    inset 0 0 12px rgba(255, 255, 255, 0.25);
+  opacity: 0.9;
+  transition: transform 0.3s cubic-bezier(.2,.9,.2,1), width 0.3s ease;
+  z-index: 0;
+  animation: navGlowPulse 2.6s ease-in-out infinite;
+}
+
+.anime-nav-item {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 18px;
+  border-radius: 999px;
+  color: rgba(255, 255, 255, 0.72);
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 650;
+  letter-spacing: 0.01em;
+  transition: color 0.2s ease;
+}
+
+.anime-nav-item:hover {
+  color: #fff;
+  transform: none;
+}
+
+.anime-nav-item.is-active {
+  color: #fff;
+}
+
+.anime-nav-item i {
+  display: none;
+  font-size: 0.95rem;
+}
+
+.anime-nav-item::after,
+.anime-nav-item:hover::after,
+.anime-nav-item.is-active::after {
+  display: none;
+}
+
+.anime-nav::before {
+  display: none !important;
+}
+
+@keyframes navGlowPulse {
+  0%,
+  100% {
+    opacity: 0.82;
+    filter: brightness(1);
+  }
+  50% {
+    opacity: 1;
+    filter: brightness(1.12);
+  }
+}
+
+@media (max-width: 920px) {
+  body.has-anime-nav {
+    padding-top: 86px !important;
+  }
+
+  .anime-nav {
+    gap: 4px;
+    padding: 6px;
+  }
+
+  .anime-nav-item {
+    height: 40px;
+    padding: 0 12px;
+    font-size: 0.82rem;
+  }
+}
+
+@media (max-width: 768px) {
+  body.has-anime-nav {
+    padding-top: 78px !important;
+  }
+
+  .anime-nav-wrap {
+    top: 12px;
+  }
+
+  .anime-nav {
+    width: min(96vw, 520px);
+    justify-content: space-between;
+    gap: 2px;
+    padding: 6px 5px;
+  }
+
+  .anime-nav-item {
+    flex: 1;
+    min-width: 34px;
+    height: 40px;
+    padding: 0;
+  }
+
+  .anime-nav-item span {
+    display: none;
+  }
+
+  .anime-nav-item i {
+    display: inline-block;
+    font-size: 1rem;
+  }
+}

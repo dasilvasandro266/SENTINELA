@@ -506,6 +506,7 @@ body.auth-page {
   border-radius: 6px;
   transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
   -webkit-appearance: none;
+  appearance: none;
 }
 
 .input-wrap input::placeholder {
@@ -773,7 +774,86 @@ body.auth-page {
 }
 
 /* ════════════════════════════════════════
-   SLIDE 2 — LEMA
+   SLIDE 2 — ANGOLA
+   ════════════════════════════════════════ */
+
+/* Fundo atmosférico com as cores de Angola */
+.angola-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(160deg,
+      rgba(180, 0, 0, 0.22) 0%,
+      rgba(0, 0, 0, 0.28) 60%,
+      rgba(60, 40, 20, 0.35) 100%
+    );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Container da bandeira + mastro */
+.angola-flag-wrap {
+  position: absolute;
+  right: -20px;
+  top: 0;
+  bottom: 0;
+  width: 220px;
+  display: flex;
+  align-items: center;
+  z-index: 0;
+  opacity: 0.18;
+}
+
+.flag-pole {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(to bottom, #c9b89a, #6b5640);
+  border-radius: 2px;
+}
+
+.flag-svg {
+  position: absolute;
+  left: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 210px;
+  height: 140px;
+  filter: drop-shadow(4px 4px 12px rgba(0,0,0,0.5));
+}
+
+/* Texto do slide Angola — cores claras sobre fundo escuro/vermelho */
+#slide-1 .panel-brand { position: relative; z-index: 1; }
+#slide-1 .panel-body  { position: relative; z-index: 1; }
+#slide-1 .panel-footer { position: relative; z-index: 1; }
+
+.angola-mark {
+  border-color: rgba(255,255,255,0.3) !important;
+  background: radial-gradient(circle at 28% 20%, rgba(204,0,0,0.5), rgba(0,0,0,0.3)) !important;
+}
+
+.angola-div { background: rgba(255,200,60,0.5) !important; }
+
+.angola-hl {
+  color: #f5f0e8 !important;
+}
+
+.angola-hl em {
+  color: rgba(255, 200, 60, 0.85) !important;
+}
+
+.angola-tag {
+  color: rgba(245, 240, 232, 0.72) !important;
+}
+
+.angola-badge {
+  color: rgba(245, 240, 232, 0.55) !important;
+}
+
+/* ════════════════════════════════════════
+   SLIDE 3 — LEMA
    ════════════════════════════════════════ */
 
 .lema-glow {
@@ -928,7 +1008,7 @@ body.auth-page {
       <div class="auth-form-wrap" id="loginCard">
 
         <header class="auth-form-header">
-          <h1 class="auth-title"><br><em>Bem&#8209;vindo!</em></h1>
+          <h1 class="auth-title">Bem&#8209;vindo<br><em>de volta</em></h1>
         </header>
 
         <form id="loginForm" class="auth-form" novalidate>
@@ -952,7 +1032,7 @@ body.auth-page {
             </label>
             <a class="auth-link" href="#">Esqueci a senha</a>
           </div>
-          <button type="submit" class="btn-primary" id="loginSubmit">Entrar</button>
+          <button type="submit" class="btn-primary" id="loginSubmit">Entrar na plataforma</button>
           <p id="error-message" class="status-message" aria-live="polite"></p>
           <div class="form-ornament">
             <span class="form-ornament-line"></span>
@@ -1033,7 +1113,7 @@ body.auth-page {
             <span class="form-ornament-line"></span>
           </div>
           <p class="auth-footer-text">
-            <a href="#" id="linkToLogin">Entrar</a>
+            <a href="#" id="linkToLogin">Entrar na plataforma</a>
           </p>
         </form>
       </div>
@@ -1133,12 +1213,12 @@ body.auth-page {
   </div>
 
   <footer class="page-footer">
-    &copy; 2026 ARTIFICE. Todos os direitos reservados.
+    &copy; 2026 SENTINELA
   </footer>
 
-  <link rel="manifest" href="manifest.json">
+  <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#8B008B">
-  <script src="pwa-install.js"></script>
+  <script src="/pwa-install.js"></script>
   <script>
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {

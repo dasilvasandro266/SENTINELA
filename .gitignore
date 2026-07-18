@@ -4,6 +4,7 @@ node_modules/
 # Variáveis de ambiente
 .env
 .env.*
+Dockerfile
 
 # Configurações privadas
 codex.config.json

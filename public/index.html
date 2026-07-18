@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SENTINELA</title>
-  <link rel="stylesheet" href="auth.css">
   <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
   <meta name="description" content="O SENTINELA é uma plataforma especialmente criada para a consulta e o ensino de matérias jurídicas.">
   <meta name="keywords" content="SENTINELA, Direito, Ensino, Jurídico">
@@ -12,16 +11,850 @@
   <meta name="robots" content="index, follow">
   <link rel="manifest" href="/manifest.json">
   <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
+
+  <!-- Meta atualizada + mantida a antiga para compatibilidade com iOS mais antigo -->
+  <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="SENTINELA">
   <meta name="theme-color" content="#4a3c2c">
   <link rel="stylesheet" href="/pwa-install.css">
+
+  <!-- ════════════════════════════════════════
+       GERAL / GLOBAL — auth.css
+       (estilos partilhados por login e cadastro)
+       ════════════════════════════════════════ -->
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap');
+
+:root {
+  --beige-50:  #faf8f5;
+  --beige-100: #f5f0e8;
+  --beige-200: #ede4d4;
+  --beige-300: #ddd0bc;
+  --beige-400: #c9b89a;
+  --beige-500: #b09a7a;
+  --beige-600: #8c7457;
+  --beige-700: #6b5640;
+  --beige-800: #4a3c2c;
+  --beige-900: #2e2419;
+
+  --ink:       #1a1612;
+  --ink-soft:  rgba(26, 22, 18, 0.62);
+  --ink-muted: rgba(26, 22, 18, 0.38);
+
+  --field-bg:      rgba(26, 22, 18, 0.04);
+  --field-border:  rgba(26, 22, 18, 0.14);
+  --field-focus:   rgba(26, 22, 18, 0.55);
+
+  --ok-color:    #4a7c59;
+  --error-color: #9b3a2e;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  width: 100%; height: 100%; min-height: 100vh;
+}
+
+body.auth-page {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--beige-50);
+  color: var(--ink);
+  overflow-x: hidden;
+}
+
+.auth-background {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(115deg, rgba(46, 36, 25, 0.92), rgba(250, 248, 245, 0.9) 48%, rgba(237, 228, 212, 0.96)),
+    radial-gradient(circle at 18% 20%, rgba(201, 184, 154, 0.35), transparent 34%);
+}
+
+.auth-noise {
+  position: absolute;
+  inset: 0;
+  opacity: 0.2;
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 47px, rgba(46, 36, 25, 0.08) 48px),
+    repeating-linear-gradient(90deg, transparent, transparent 47px, rgba(46, 36, 25, 0.06) 48px);
+}
+
+.auth-card-wrap {
+  min-height: 100vh;
+  grid-column: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 40px;
+}
+
+.auth-card-wrap::before {
+  content: "SENTINELA";
+  position: fixed;
+  left: 56px;
+  top: 52px;
+  color: var(--beige-300);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+}
+
+.auth-card-wrap::after {
+  content: "Estudo juridico com memoria, metodo e precisao.";
+  position: fixed;
+  left: 56px;
+  bottom: 52px;
+  max-width: 320px;
+  color: rgba(245, 240, 232, 0.72);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 3vw, 3rem);
+  line-height: 1.15;
+}
+
+.auth-card {
+  width: min(100%, 430px);
+  border: 1px solid rgba(74, 60, 44, 0.12);
+  border-radius: 14px;
+  background: rgba(250, 248, 245, 0.82);
+  box-shadow: 0 28px 80px rgba(46, 36, 25, 0.18);
+  backdrop-filter: blur(14px);
+  transition: transform 0.18s ease;
+}
+
+.auth-card-content {
+  padding: 34px;
+}
+
+.brand-mark {
+  width: 42px;
+  height: 42px;
+  margin-bottom: 24px;
+  border: 1px solid rgba(46, 36, 25, 0.2);
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px;
+  color: var(--beige-800);
+}
+
+.auth-subtitle {
+  margin: 8px 0 30px;
+  color: var(--ink-soft);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.input-icon {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--ink-muted);
+  font-size: 12px;
+  pointer-events: none;
+}
+
+.input-wrap:has(.password-toggle) .input-icon {
+  display: none;
+}
+
+.btn {
+  margin-top: 10px;
+}
+
+.btn-secondary {
+  width: 100%;
+  height: 46px;
+  border: 1px solid var(--field-border);
+  border-radius: 6px;
+  background: rgba(250, 248, 245, 0.72);
+  color: var(--beige-800);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.consent-block {
+  margin: 4px 0 12px;
+  padding: 12px;
+  border: 1px solid var(--field-border);
+  border-radius: 8px;
+  background: rgba(26, 22, 18, 0.035);
+}
+
+.consent-title,
+.consent-item {
+  color: var(--ink-soft);
+  font-size: 12px;
+}
+
+.consent-item {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 8px;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.link-btn,
+.legal-close {
+  border: 0;
+  background: transparent;
+  color: var(--beige-700);
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+}
+
+.legal-modal[aria-hidden="true"] {
+  display: none;
+}
+
+.legal-modal[aria-hidden="false"] {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+}
+
+.legal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(26, 22, 18, 0.48);
+  backdrop-filter: blur(4px);
+}
+
+.legal-card {
+  position: relative;
+  width: min(720px, 94vw);
+  max-height: 82vh;
+  overflow: auto;
+  border-radius: 12px;
+  background: var(--beige-50);
+  box-shadow: 0 26px 80px rgba(26, 22, 18, 0.28);
+  padding: 22px;
+}
+
+.legal-header,
+.legal-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+}
+
+.legal-content {
+  margin: 18px 0;
+  color: var(--ink-soft);
+  line-height: 1.65;
+}
+
+.legal-content h3 {
+  margin: 16px 0 6px;
+  color: var(--ink);
+}
+
+/* ── LAYOUT ── */
+.auth-shell {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+}
+
+@media (max-width: 860px) {
+  .auth-shell { grid-template-columns: 1fr; }
+  .auth-panel-left { display: none; }
+  .auth-card-wrap {
+    grid-column: 1;
+    padding: 28px 18px;
+  }
+  .auth-card-wrap::before,
+  .auth-card-wrap::after {
+    display: none;
+  }
+}
+
+/* ── LEFT PANEL ── */
+.auth-panel-left {
+  position: relative;
+  background: var(--beige-800);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 52px 56px;
+  overflow: hidden;
+}
+
+.panel-texture {
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 79px,
+      rgba(255,255,255,0.04) 79px,
+      rgba(255,255,255,0.04) 80px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 79px,
+      rgba(255,255,255,0.04) 79px,
+      rgba(255,255,255,0.04) 80px
+    );
+  pointer-events: none;
+}
+
+.panel-glow {
+  position: absolute;
+  bottom: -120px;
+  left: -80px;
+  width: 480px;
+  height: 480px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(193,163,115,0.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.panel-brand {
+  position: relative;
+  z-index: 1;
+}
+
+.panel-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.panel-logo-mark {
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--beige-200);
+  letter-spacing: 0.02em;
+}
+
+.panel-logo-name {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--beige-300);
+}
+
+.panel-body {
+  position: relative;
+  z-index: 1;
+}
+
+.panel-headline {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.4rem, 3.5vw, 3.4rem);
+  font-weight: 300;
+  line-height: 1.18;
+  color: var(--beige-100);
+  margin-bottom: 20px;
+}
+
+.panel-headline em {
+  font-style: italic;
+  color: var(--beige-400);
+}
+
+.panel-tagline {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--beige-400);
+  line-height: 1.65;
+  max-width: 320px;
+}
+
+.panel-divider {
+  width: 36px;
+  height: 1px;
+  background: var(--beige-600);
+  margin-bottom: 20px;
+}
+
+.panel-footer {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.panel-footer-badge {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--beige-600);
+}
+
+.panel-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.panel-dots span {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--beige-600);
+}
+
+.panel-dots span:first-child {
+  background: var(--beige-400);
+}
+
+/* ── RIGHT PANEL ── */
+.auth-panel-right {
+  background: var(--beige-50);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 40px;
+  position: relative;
+}
+
+.auth-panel-right::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent, var(--beige-200) 20%, var(--beige-200) 80%, transparent);
+}
+
+.auth-form-wrap {
+  width: 100%;
+  max-width: 380px;
+}
+
+/* ── FORM HEADER ── */
+.auth-form-header {
+  margin-bottom: 36px;
+}
+
+
+.auth-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.1rem;
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--ink);
+}
+
+.auth-title em {
+  font-style: italic;
+  color: var(--beige-600);
+}
+
+/* ── FORM ── */
+.auth-form {
+  display: grid;
+  gap: 0;
+}
+
+.form-group {
+  display: grid;
+  gap: 7px;
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.input-wrap {
+  position: relative;
+}
+
+.input-wrap input {
+  width: 100%;
+  height: 46px;
+  padding: 0 42px 0 14px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--ink);
+  background: var(--field-bg);
+  border: 1px solid var(--field-border);
+  border-radius: 6px;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+  -webkit-appearance: none;
+}
+
+.input-wrap input::placeholder {
+  color: var(--ink-muted);
+  font-weight: 300;
+}
+
+.input-wrap input:focus {
+  outline: none;
+  border-color: var(--field-focus);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(26, 22, 18, 0.06);
+}
+
+.password-toggle {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  background: transparent;
+  color: var(--ink-muted);
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 4px;
+  transition: color 0.15s;
+}
+
+.password-toggle:hover { color: var(--ink); }
+
+/* ── OPTIONS ROW ── */
+.auth-options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+  margin-top: -6px;
+}
+
+.checkbox-line {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+
+.checkbox-line input[type="checkbox"] {
+  width: 15px;
+  height: 15px;
+  border-radius: 3px;
+  accent-color: var(--beige-700);
+  cursor: pointer;
+}
+
+.auth-link {
+  color: var(--ink-soft);
+  text-decoration: none;
+  font-size: 12.5px;
+  border-bottom: 1px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.auth-link:hover {
+  color: var(--ink);
+  border-bottom-color: var(--ink-muted);
+}
+
+/* ── SUBMIT ── */
+.btn-primary {
+  width: 100%;
+  height: 48px;
+  border: none;
+  border-radius: 6px;
+  background: var(--beige-800);
+  color: var(--beige-100);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.btn-primary:hover {
+  background: var(--beige-900);
+}
+
+.btn-primary:active {
+  transform: scale(0.99);
+}
+
+.btn-primary[disabled] {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+/* ── STATUS ── */
+.status-message {
+  min-height: 18px;
+  margin-top: 12px;
+  font-size: 12px;
+  text-align: center;
+  color: var(--error-color);
+}
+
+.status-message.success {
+  color: var(--ok-color);
+}
+
+/* ── FOOTER TEXT ── */
+.auth-footer-text {
+  margin-top: 24px;
+  text-align: center;
+  color: var(--ink-muted);
+  font-size: 12.5px;
+}
+
+.auth-footer-text a {
+  color: var(--beige-700);
+  text-decoration: none;
+  font-weight: 500;
+  border-bottom: 1px solid var(--beige-300);
+  padding-bottom: 1px;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.auth-footer-text a:hover {
+  color: var(--ink);
+  border-color: var(--ink-muted);
+}
+
+/* ── ORNAMENT ── */
+.form-ornament {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.form-ornament-line {
+  flex: 1;
+  height: 1px;
+  background: var(--beige-200);
+}
+
+.form-ornament-text {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--beige-400);
+  white-space: nowrap;
+}
+
+/* ── PAGE FOOTER ── */
+.page-footer {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  padding: 14px 24px;
+  font-size: 10.5px;
+  color: var(--ink-muted);
+  letter-spacing: 0.05em;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 520px) {
+  .auth-panel-right { padding: 40px 24px; }
+  .auth-title { font-size: 1.8rem; }
+}
+
+/* ── ENTRANCE ANIMATION ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.auth-form-wrap {
+  animation: fadeUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.auth-panel-left .panel-brand {
+  animation: fadeUp 0.5s 0.1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.auth-panel-left .panel-body {
+  animation: fadeUp 0.5s 0.2s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ════════════════════════════════════════
+   CARROSSEL DO PAINEL ESQUERDO
+   ════════════════════════════════════════ */
+
+/* O painel esquerdo passa a ser o container dos slides */
+.auth-panel-left {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Cada slide ocupa todo o painel */
+.panel-slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 52px 56px;
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 0.6s cubic-bezier(0.22,1,0.36,1),
+              transform 0.6s cubic-bezier(0.22,1,0.36,1);
+  pointer-events: none;
+}
+
+.panel-slide.active {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+  position: relative; /* só o activo ocupa espaço no flow */
+}
+
+.panel-slide.leaving {
+  opacity: 0;
+  transform: translateX(-40px);
+  position: absolute;
+  pointer-events: none;
+}
+
+/* ── DOTS DINÂMICOS ── */
+.panel-dots {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.panel-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--beige-600);
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+  border: none;
+}
+
+.panel-dot.active {
+  background: var(--beige-300);
+  transform: scale(1.35);
+}
+
+/* ════════════════════════════════════════
+   SLIDE 2 — LEMA
+   ════════════════════════════════════════ */
+
+.lema-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 30% 60%, rgba(193,163,115,0.14) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+#slide-2 .panel-brand { position: relative; z-index: 1; }
+#slide-2 .panel-footer { position: relative; z-index: 1; }
+
+.lema-body {
+  position: relative;
+  z-index: 1;
+  display: flex !important;
+  flex-direction: column;
+  gap: 0;
+}
+
+.lema-ornament {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.lema-ornament span:not(.lema-diamond) {
+  flex: 0 0 28px;
+  height: 1px;
+  background: var(--beige-600);
+}
+
+.lema-diamond {
+  font-size: 8px;
+  color: var(--beige-500);
+  letter-spacing: 0;
+}
+
+.lema-headline {
+  font-family: 'Cormorant Garamond', serif !important;
+  font-size: clamp(2.8rem, 4.2vw, 4rem) !important;
+  font-weight: 300 !important;
+  line-height: 1.12 !important;
+  color: var(--beige-100) !important;
+  letter-spacing: -0.01em;
+  margin-bottom: 28px;
+}
+
+.lema-headline em {
+  font-style: italic;
+  color: var(--beige-400) !important;
+}
+
+.lema-rule {
+  width: 50px;
+  height: 1px;
+  background: linear-gradient(to right, var(--beige-500), transparent);
+  margin-bottom: 14px;
+}
+
+.lema-sub {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--beige-600) !important;
+}
+
+  </style>
 </head>
 
 <body class="auth-page">
+
+  <!-- ════════════════════════════════════════
+       ESTRUTURA PARTILHADA — carrossel lateral + painel direito
+       O painel direito troca apenas o CARTÃO (login ⇄ cadastro)
+       ════════════════════════════════════════ -->
   <div class="auth-shell">
 
-    <!-- ── PAINEL ESQUERDO (CARROSSEL) ── -->
+    <!-- ── PAINEL ESQUERDO (CARROSSEL) — partilhado por login e cadastro ── -->
     <aside class="auth-panel-left" aria-hidden="true">
 
       <!-- SLIDE 1 -->
@@ -81,7 +914,7 @@
 
     </aside>
 
-    <!-- ── PAINEL DIREITO ── -->
+    <!-- ── PAINEL DIREITO — aqui só o cartão interior muda ── -->
     <main class="auth-panel-right">
       <div id="pwaInstallBanner" class="pwa-install-banner hidden" role="dialog" aria-live="polite">
         <span class="pwa-install-text">Instale o app SENTINELA para acesso mais rápido e leitura offline.</span>
@@ -90,10 +923,12 @@
           <button id="pwaInstallClose" class="pwa-install-close" type="button" aria-label="Fechar">×</button>
         </div>
       </div>
-      <div class="auth-form-wrap">
+
+      <!-- ═══ CARTÃO 1 — LOGIN ═══ -->
+      <div class="auth-form-wrap" id="loginCard">
 
         <header class="auth-form-header">
-          <h1 class="auth-title">Bem&#8209;vindo<br><em>de volta</em></h1>
+          <h1 class="auth-title"><br><em>Bem&#8209;vindo!</em></h1>
         </header>
 
         <form id="loginForm" class="auth-form" novalidate>
@@ -117,7 +952,7 @@
             </label>
             <a class="auth-link" href="#">Esqueci a senha</a>
           </div>
-          <button type="submit" class="btn-primary" id="loginSubmit">Entrar na plataforma</button>
+          <button type="submit" class="btn-primary" id="loginSubmit">Entrar</button>
           <p id="error-message" class="status-message" aria-live="polite"></p>
           <div class="form-ornament">
             <span class="form-ornament-line"></span>
@@ -125,23 +960,185 @@
             <span class="form-ornament-line"></span>
           </div>
           <p class="auth-footer-text">
-            <a href="cadastro.html">Criar conta gratuita</a>
+            <a href="#" id="linkToCadastro">Criar conta gratuita</a>
           </p>
         </form>
       </div>
+
+      <!-- ═══ CARTÃO 2 — CADASTRO ═══ -->
+      <div class="auth-form-wrap" id="cadastroCard" style="display:none;">
+
+        <header class="auth-form-header">
+          <h1 class="auth-title">Criar<br><em>conta</em></h1>
+        </header>
+
+        <form id="signupForm" class="auth-form" novalidate>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <div class="input-wrap">
+              <input type="email" id="email" placeholder="teu@email.com" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="username">Nome de usuário</label>
+            <div class="input-wrap">
+              <input type="text" id="username" placeholder="teu_usuario" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="nomeCompleto">Nome completo</label>
+            <div class="input-wrap">
+              <input type="text" id="nomeCompleto" placeholder="Nome completo">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="cadastroPassword">Senha (mínimo 6 caracteres)</label>
+            <div class="input-wrap">
+              <input type="password" id="cadastroPassword" minlength="6" placeholder="Crie uma senha" required>
+              <button type="button" class="password-toggle" data-password-toggle="cadastroPassword">Mostrar</button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="confirmPassword">Confirmar senha</label>
+            <div class="input-wrap">
+              <input type="password" id="confirmPassword" placeholder="Repita a senha" required>
+              <button type="button" class="password-toggle" data-password-toggle="confirmPassword">Mostrar</button>
+            </div>
+          </div>
+
+          <div class="consent-block">
+            <p class="consent-title">Para criar a conta, precisas concordar com:</p>
+            <div class="consent-item">
+              <input type="checkbox" id="aceiteTermos" disabled>
+              <label for="aceiteTermos">Termos e Condições</label>
+              <button type="button" class="link-btn" data-open-modal="termosModal">Ler</button>
+            </div>
+            <div class="consent-item">
+              <input type="checkbox" id="aceitePrivacidade" disabled>
+              <label for="aceitePrivacidade">Política de Privacidade</label>
+              <button type="button" class="link-btn" data-open-modal="privacidadeModal">Ler</button>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-primary" id="signupSubmit">Cadastrar</button>
+          <p id="cadastro-error-message" class="status-message" aria-live="polite"></p>
+          <p id="success-message" class="status-message success" aria-live="polite"></p>
+          <div class="form-ornament">
+            <span class="form-ornament-line"></span>
+            <span class="form-ornament-text">Já tens conta?</span>
+            <span class="form-ornament-line"></span>
+          </div>
+          <p class="auth-footer-text">
+            <a href="#" id="linkToLogin">Entrar</a>
+          </p>
+        </form>
+      </div>
+
     </main>
 
   </div>
 
+  <div class="legal-modal" id="termosModal" aria-hidden="true">
+    <div class="legal-backdrop" data-close-modal></div>
+    <div class="legal-card" role="dialog" aria-modal="true" aria-labelledby="termosTitle">
+      <header class="legal-header">
+        <h2 id="termosTitle">Termos e Condições — SENTINELA</h2>
+        <button type="button" class="legal-close" data-close-modal>Fechar</button>
+      </header>
+      <div class="legal-content">
+        <h3>1. Aceitação dos Termos</h3>
+        <p>Ao aceder e utilizar a plataforma SENTINELA, o utilizador concorda com os presentes Termos e Condições. Caso não concorde, deve cessar imediatamente o uso da plataforma.</p>
+
+        <h3>2. Natureza da Plataforma</h3>
+        <p>O SENTINELA é uma plataforma digital de apoio ao estudo jurídico, que disponibiliza conteúdos doutrinários estruturados, materiais jurídicos e recursos interativos. A plataforma não substitui ensino formal, nem constitui aconselhamento jurídico profissional.</p>
+
+        <h3>3. Conta do Utilizador</h3>
+        <p>O utilizador poderá criar uma conta para aceder a funcionalidades avançadas. Deve manter os dados de acesso seguros, não partilhar credenciais e garantir a veracidade das informações fornecidas. O SENTINELA pode suspender contas em caso de uso indevido.</p>
+
+        <h3>4. Uso Permitido</h3>
+        <p>O utilizador compromete-se a utilizar a plataforma apenas para fins educacionais, não copiar/distribuir conteúdos sem autorização, nem tentar comprometer a segurança do sistema. É proibido engenharia reversa, scraping massivo e uso automatizado abusivo.</p>
+
+        <h3>5. Propriedade Intelectual</h3>
+        <p>Todo o conteúdo da plataforma pertence ao SENTINELA ou licenciadores. O modelo estrutural é parte do diferencial do sistema.</p>
+
+        <h3>6. Conteúdos Jurídicos</h3>
+        <p>Embora o SENTINELA procure manter conteúdos atualizados, pode haver desatualizações e o utilizador deve validar em fontes oficiais.</p>
+
+        <h3>7. Disponibilidade do Serviço</h3>
+        <p>O SENTINELA pode atualizar funcionalidades, suspender temporariamente ou descontinuar partes da plataforma sem aviso prévio.</p>
+
+        <h3>8. Limitação de Responsabilidade</h3>
+        <p>O SENTINELA não se responsabiliza por decisões tomadas com base nos conteúdos, perdas diretas ou indiretas, interrupções ou falhas técnicas.</p>
+
+        <h3>9. Modificações dos Termos</h3>
+        <p>Os Termos podem ser atualizados a qualquer momento. O uso contínuo implica aceitação das alterações.</p>
+
+        <h3>10. Lei Aplicável</h3>
+        <p>Estes Termos regem-se pela legislação da República de Angola.</p>
+      </div>
+      <div class="legal-actions">
+        <button type="button" class="btn btn-secondary" data-close-modal>Fechar</button>
+        <button type="button" class="btn btn-primary" data-accept="termos">Concordo</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="legal-modal" id="privacidadeModal" aria-hidden="true">
+    <div class="legal-backdrop" data-close-modal></div>
+    <div class="legal-card" role="dialog" aria-modal="true" aria-labelledby="privacidadeTitle">
+      <header class="legal-header">
+        <h2 id="privacidadeTitle">Política de Privacidade — SENTINELA</h2>
+        <button type="button" class="legal-close" data-close-modal>Fechar</button>
+      </header>
+      <div class="legal-content">
+        <h3>1. Princípio Base</h3>
+        <p>O SENTINELA foi concebido para ser uma plataforma inteligente, mas respeitadora da privacidade. Dados são utilizados para melhorar a experiência.</p>
+
+        <h3>2. Dados Recolhidos</h3>
+        <p>Dados fornecidos (nome, email, informações de conta), dados de utilização (interações, tempo, preferências) e dados técnicos (IP, dispositivo, navegador).</p>
+
+        <h3>3. Finalidade dos Dados</h3>
+        <p>Personalizar a experiência, melhorar conteúdos, garantir segurança e desenvolver sistemas inteligentes.</p>
+
+        <h3>4. Uso Estratégico (Visão de Futuro)</h3>
+        <p>O SENTINELA pode utilizar dados anonimizados para treinar modelos e criar experiências educativas mais adaptativas. Nunca serão vendidos dados pessoais identificáveis.</p>
+
+        <h3>5. Partilha de Dados</h3>
+        <p>Dados não são vendidos. Podem ser partilhados apenas com serviços técnicos essenciais ou quando exigido por lei.</p>
+
+        <h3>6. Segurança</h3>
+        <p>São adotadas medidas de encriptação e controlo de acessos, mas nenhum sistema é 100% invulnerável.</p>
+
+        <h3>7. Direitos do Utilizador</h3>
+        <p>O utilizador pode aceder aos seus dados, corrigir informações, solicitar eliminação e opor-se ao tratamento.</p>
+
+        <h3>8. Cookies</h3>
+        <p>A plataforma pode usar cookies para melhorar desempenho, guardar preferências e análise de uso.</p>
+
+        <h3>9. Retenção de Dados</h3>
+        <p>Os dados são mantidos apenas pelo tempo necessário para operação, cumprimento legal e melhoria contínua.</p>
+
+        <h3>10. Alterações à Política</h3>
+        <p>A política pode ser atualizada conforme evolução da plataforma.</p>
+      </div>
+      <div class="legal-actions">
+        <button type="button" class="btn btn-secondary" data-close-modal>Fechar</button>
+        <button type="button" class="btn btn-primary" data-accept="privacidade">Concordo</button>
+      </div>
+    </div>
+  </div>
+
   <footer class="page-footer">
-    &copy; 2026 SENTINELA
+    &copy; 2026 ARTIFICE. Todos os direitos reservados.
   </footer>
 
-  <link rel="manifest" href="/manifest.json">
+  <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#8B008B">
-  <script src="auth-ui.js"></script>
-  <script src="index.js"></script>
-  <script src="/pwa-install.js"></script>
+  <script src="pwa-install.js"></script>
   <script>
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
@@ -154,6 +1151,28 @@
         });
     });
   }
+
+  // ── ALTERNÂNCIA ENTRE CARTÕES (login ⇄ cadastro) ──
+  // O carrossel lateral e a estrutura do painel direito são partilhados;
+  // apenas o cartão interior (loginCard / cadastroCard) é trocado.
+  function showView(view) {
+    const loginCard = document.getElementById('loginCard');
+    const cadastroCard = document.getElementById('cadastroCard');
+    if (!loginCard || !cadastroCard) return;
+    loginCard.style.display = view === 'login' ? '' : 'none';
+    cadastroCard.style.display = view === 'cadastro' ? '' : 'none';
+  }
+
+  document.getElementById('linkToCadastro')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    showView('cadastro');
+  });
+
+  document.getElementById('linkToLogin')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    showView('login');
+  });
+
   // ── CARROSSEL DO PAINEL ESQUERDO (REFATORADO) ──
   (function() {
     const slides        = document.querySelectorAll('.panel-slide');
@@ -259,6 +1278,371 @@
 
     initCarousel();
   })();
+  </script>
+
+  <!-- ════════════════════════════════════════
+       PROCESSO 1 — LOGIN (index.js)
+       ════════════════════════════════════════ -->
+  <script>
+    (function () {
+      // URL base do servidor
+      const API_URL = '/api';
+
+      const loginForm = document.getElementById('loginForm');
+      const errorMessage = document.getElementById('error-message');
+      const loginSubmit = document.getElementById('loginSubmit');
+
+      if (!loginForm) return;
+
+      const isAdmin = (user) => user?.isAdmin === true || user?.isAdmin === 1 || user?.isAdmin === '1';
+
+      function setLoading(isLoading) {
+        if (!loginSubmit) return;
+        loginSubmit.disabled = isLoading;
+        loginSubmit.textContent = isLoading ? 'A entrar...' : 'Entrar';
+      }
+
+      // Redireciona de forma segura, dando tempo ao navegador para
+      // terminar quaisquer transições/animações em curso antes de navegar.
+      // Isto evita o aviso "AbortError: Transition was skipped".
+      function safeRedirect(url) {
+        requestAnimationFrame(() => {
+          window.location.href = url;
+        });
+      }
+
+      loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const identificador = document.getElementById('identificador').value.trim();
+        const password = document.getElementById('password').value;
+
+        if (!identificador || !password) {
+          errorMessage.innerText = 'Por favor, preencha todos os campos.';
+          return;
+        }
+
+        if (!navigator.onLine) {
+          errorMessage.innerText = 'Estás offline. Conecta-te à internet.';
+          return;
+        }
+
+        try {
+          errorMessage.innerText = '';
+          setLoading(true);
+
+          const response = await fetch(`${API_URL}/login`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ identificador, password }),
+          });
+
+          const data = await response.json();
+
+          if (!response.ok) {
+            throw { code: response.status, message: data.error };
+          }
+
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('user', JSON.stringify(data.user));
+          localStorage.setItem('userUID', data.user.id);
+          localStorage.setItem('userEmail', data.user.email);
+          localStorage.setItem('userDisplayName', data.user.username);
+
+          safeRedirect('home.html');
+        } catch (error) {
+          console.error('Erro de login:', error);
+          handleLoginError(error);
+          setLoading(false);
+        }
+      });
+
+      function handleLoginError(error) {
+        let errorText = 'Erro ao fazer login. Tente novamente.';
+
+        if (error.message) {
+          errorText = error.message;
+        } else if (error.code === 401) {
+          errorText = 'Credenciais inválidas.';
+        } else if (error.code === 500) {
+          errorText = 'Erro no servidor. Tente mais tarde.';
+        }
+
+        errorMessage.innerText = errorText;
+      }
+
+      window.addEventListener('load', () => {
+        const token = localStorage.getItem('token');
+        if (token) {
+          verifyToken(token);
+        }
+      });
+
+      async function verifyToken(token) {
+        try {
+          const response = await fetch(`${API_URL}/verify-token`, {
+            method: 'POST',
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+
+          if (response.ok) {
+            const user = JSON.parse(localStorage.getItem('user') || '{}');
+            safeRedirect('home.html');
+          }
+        } catch (error) {
+          console.log('Token inválido ou expirado');
+        }
+      }
+    })();
+  </script>
+
+  <!-- ════════════════════════════════════════
+       PROCESSO 2 — CADASTRO (cadastro.js)
+       ════════════════════════════════════════ -->
+  <script>
+    (function () {
+      const API_URL = '/api';
+
+      const signupForm = document.getElementById('signupForm');
+      const errorMessage = document.getElementById('cadastro-error-message');
+      const successMessage = document.getElementById('success-message');
+      const signupSubmit = document.getElementById('signupSubmit');
+      const aceiteTermos = document.getElementById('aceiteTermos');
+      const aceitePrivacidade = document.getElementById('aceitePrivacidade');
+      const modalOpeners = document.querySelectorAll('[data-open-modal]');
+      const modalClosers = document.querySelectorAll('[data-close-modal]');
+      const modalAccepts = document.querySelectorAll('[data-accept]');
+
+      if (!signupForm) return;
+
+      let isSubmitting = false;
+
+      function validarEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+      }
+
+      function validarUsername(username) {
+        const re = /^[a-zA-Z0-9_]+$/;
+        return re.test(username);
+      }
+
+      function setLoading(isLoading) {
+        isSubmitting = isLoading;
+        if (!signupSubmit) return;
+        signupSubmit.disabled = isLoading || !isConsentValid();
+        signupSubmit.textContent = isLoading ? 'A cadastrar...' : 'Cadastrar';
+      }
+
+      function isConsentValid() {
+        return !!(aceiteTermos && aceitePrivacidade && aceiteTermos.checked && aceitePrivacidade.checked);
+      }
+
+      function updateConsentState() {
+        if (!signupSubmit) return;
+        signupSubmit.disabled = isSubmitting || !isConsentValid();
+      }
+
+      function toggleModal(modal, shouldOpen) {
+        if (!modal) return;
+        modal.classList.toggle('show', shouldOpen);
+        modal.setAttribute('aria-hidden', shouldOpen ? 'false' : 'true');
+      }
+
+      modalOpeners.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const targetId = btn.getAttribute('data-open-modal');
+          toggleModal(document.getElementById(targetId), true);
+        });
+      });
+
+      modalClosers.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const modal = btn.closest('.legal-modal');
+          toggleModal(modal, false);
+        });
+      });
+
+      modalAccepts.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const tipo = btn.getAttribute('data-accept');
+          if (tipo === 'termos' && aceiteTermos) aceiteTermos.checked = true;
+          if (tipo === 'privacidade' && aceitePrivacidade) aceitePrivacidade.checked = true;
+          updateConsentState();
+          const modal = btn.closest('.legal-modal');
+          toggleModal(modal, false);
+        });
+      });
+
+      if (aceiteTermos) aceiteTermos.addEventListener('change', updateConsentState);
+      if (aceitePrivacidade) aceitePrivacidade.addEventListener('change', updateConsentState);
+
+      signupForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const email = document.getElementById('email').value.trim();
+        const username = document.getElementById('username').value.trim();
+        const nomeCompleto = document.getElementById('nomeCompleto').value.trim();
+        const password = document.getElementById('cadastroPassword').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+
+        errorMessage.innerText = '';
+        successMessage.innerText = '';
+
+        if (!email || !username || !password || !confirmPassword) {
+          errorMessage.innerText = 'Por favor, preencha todos os campos obrigatórios.';
+          return;
+        }
+
+        if (!validarEmail(email)) {
+          errorMessage.innerText = 'Por favor, insira um email válido.';
+          return;
+        }
+
+        if (!validarUsername(username)) {
+          errorMessage.innerText = 'Nome de usuário deve conter apenas letras, números e underscore (_).';
+          return;
+        }
+
+        if (username.length < 3) {
+          errorMessage.innerText = 'Nome de usuário deve ter pelo menos 3 caracteres.';
+          return;
+        }
+
+        if (password !== confirmPassword) {
+          errorMessage.innerText = 'As senhas não coincidem.';
+          return;
+        }
+
+        if (password.length < 6) {
+          errorMessage.innerText = 'A senha deve ter pelo menos 6 caracteres.';
+          return;
+        }
+
+        if (!navigator.onLine) {
+          errorMessage.innerText = 'Estás offline. Conecta-te à internet para cadastrar.';
+          return;
+        }
+
+        if (!isConsentValid()) {
+          errorMessage.innerText = 'Precisas concordar com os Termos e a Política de Privacidade.';
+          return;
+        }
+
+        setLoading(true);
+
+        try {
+          const response = await fetch(`${API_URL}/cadastro`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              email,
+              username,
+              nomeCompleto,
+              password,
+            }),
+          });
+
+          const data = await response.json();
+
+          if (!response.ok) {
+            throw new Error(data.error || 'Erro ao cadastrar');
+          }
+
+          successMessage.innerText = 'Cadastro realizado com sucesso! Redirecionando...';
+
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('user', JSON.stringify(data.user));
+          localStorage.setItem('userUID', data.user.id);
+          localStorage.setItem('userEmail', data.user.email);
+          localStorage.setItem('userDisplayName', data.user.username);
+          localStorage.setItem(
+            'userData',
+            JSON.stringify({
+              nome_completo: data.user.nome_completo,
+              isAdmin: data.user.isAdmin,
+            })
+          );
+
+          setTimeout(() => {
+            window.location.href = '/app/home';
+          }, 1400);
+        } catch (error) {
+          console.error('Erro de cadastro:', error);
+          errorMessage.innerText = error.message || 'Erro ao fazer cadastro. Tente novamente.';
+          setLoading(false);
+        }
+      });
+
+      document.getElementById('confirmPassword').addEventListener('input', function () {
+        const password = document.getElementById('cadastroPassword').value;
+        const confirm = this.value;
+
+        if (confirm && password !== confirm) {
+          this.style.borderColor = '#ff7b7b';
+        } else {
+          this.style.borderColor = '';
+        }
+      });
+
+      document.getElementById('cadastroPassword').addEventListener('input', function () {
+        const confirmInput = document.getElementById('confirmPassword');
+        const confirm = confirmInput.value;
+
+        if (confirm && this.value !== confirm) {
+          confirmInput.style.borderColor = '#ff7b7b';
+        } else if (confirm) {
+          confirmInput.style.borderColor = '';
+        }
+      });
+
+      updateConsentState();
+    })();
+  </script>
+
+  <!-- ════════════════════════════════════════
+       GERAL / GLOBAL — auth-ui.js
+       (toggle de senha e efeito tilt, usados por login e cadastro)
+       ════════════════════════════════════════ -->
+  <script>
+    (function () {
+      const toggles = document.querySelectorAll('[data-password-toggle]');
+      toggles.forEach((toggle) => {
+        toggle.addEventListener('click', () => {
+          const targetId = toggle.getAttribute('data-password-toggle');
+          const input = targetId ? document.getElementById(targetId) : null;
+          if (!input) return;
+
+          const isHidden = input.type === 'password';
+          input.type = isHidden ? 'text' : 'password';
+          toggle.textContent = isHidden ? 'Ocultar' : 'Mostrar';
+        });
+      });
+
+      const cards = document.querySelectorAll('[data-tilt-card]');
+      cards.forEach((card) => {
+        card.addEventListener('mousemove', (event) => {
+          const rect = card.getBoundingClientRect();
+          const x = event.clientX - rect.left;
+          const y = event.clientY - rect.top;
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+          const rotateY = ((x - centerX) / centerX) * 4;
+          const rotateX = ((centerY - y) / centerY) * 4;
+          card.style.transform = 'rotateX(' + rotateX.toFixed(2) + 'deg) rotateY(' + rotateY.toFixed(2) + 'deg)';
+        });
+
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = 'rotateX(0deg) rotateY(0deg)';
+        });
+      });
+    })();
   </script>
 </body>
 </html>

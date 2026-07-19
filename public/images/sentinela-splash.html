@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Sentinela — Splash Animation</title>
+<style>
+  :root{
+    --orange1:#ffb020;
+    --orange2:#ff7a1a;
+    --bg:#000;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:100vh;
+    font-family:'Segoe UI', Arial, sans-serif;
+    color:#fff;
+  }
+
+  #splash{
+    width:320px;
+    height:320px;
+    position:relative;
+  }
+  #splash svg{
+    width:100%;
+    height:100%;
+    overflow:visible;
+  }
+  .stroke{
+    fill:none;
+    stroke:url(#grad);
+    stroke-linecap:round;
+    stroke-width:26;
+    vector-effect:non-scaling-stroke;
+  }
+  .dot{ fill:url(#gradDot); }
+  .dotGlow{
+    fill:var(--orange1);
+    opacity:0.35;
+    filter:blur(8px);
+  }
+
+  #wordmark{
+    position:absolute;
+    bottom:-6px;
+    left:50%;
+    transform:translateX(-50%);
+    letter-spacing:8px;
+    font-size:26px;
+    font-weight:600;
+    opacity:0;
+    white-space:nowrap;
+  }
+
+  /* single continuous motion, ~7s, loops smoothly */
+  #sTop{
+    transform-origin: 200px 195px;
+    animation: sTopAnim 7s cubic-bezier(.65,0,.35,1) infinite;
+  }
+  #sBottom{
+    transform-origin: 200px 205px;
+    animation: sBottomAnim 7s cubic-bezier(.65,0,.35,1) infinite;
+  }
+  .dot, .dotGlow{ animation: dotAnim 7s cubic-bezier(.65,0,.35,1) infinite; }
+  #wordmark{ animation: wordAnim 7s cubic-bezier(.65,0,.35,1) infinite; }
+
+  /* dot 1 (left): expands upward from its own base, then slides in and rotates into the S */
+  @keyframes sTopAnim{
+    0%   { transform: translate(-70px,15px) scale(0.02) rotate(0deg); }
+    14%  { transform: translate(-70px,15px) scale(0.02) rotate(0deg); }
+    40%  { transform: translate(-70px,15px) scale(1) rotate(0deg); }
+    50%  { transform: translate(-70px,15px) scale(1) rotate(0deg); }
+    78%  { transform: translate(0,0) scale(1) rotate(0deg); }
+    92%  { transform: translate(0,0) scale(1) rotate(0deg); }
+    100% { transform: translate(-70px,15px) scale(0.02) rotate(0deg); }
+  }
+  /* dot 3 (right): expands downward from its own base, then slides in and rotates into the S */
+  @keyframes sBottomAnim{
+    0%   { transform: translate(70px,-15px) scale(0.02) rotate(0deg); }
+    14%  { transform: translate(70px,-15px) scale(0.02) rotate(0deg); }
+    40%  { transform: translate(70px,-15px) scale(1) rotate(0deg); }
+    50%  { transform: translate(70px,-15px) scale(1) rotate(0deg); }
+    78%  { transform: translate(0,0) scale(1) rotate(0deg); }
+    92%  { transform: translate(0,0) scale(1) rotate(0deg); }
+    100% { transform: translate(70px,-15px) scale(0.02) rotate(0deg); }
+  }
+  /* dot 2 (center): stays put, small pulse once the sides finish expanding */
+  @keyframes dotAnim{
+    0%   { r:11; }
+    38%  { r:11; }
+    46%  { r:15; }
+    54%  { r:11; }
+    92%  { r:11; }
+    100% { r:11; }
+  }
+  @keyframes wordAnim{
+    0%,76%{ opacity:0; transform:translateX(-50%) translateY(6px); }
+    86%   { opacity:1; transform:translateX(-50%) translateY(0); }
+    94%   { opacity:1; }
+    100%  { opacity:0; transform:translateX(-50%) translateY(6px); }
+  }
+</style>
+</head>
+<body>
+
+<div id="splash">
+  <svg viewBox="0 0 400 400">
+    <defs>
+      <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="var(--orange1)"/>
+        <stop offset="100%" stop-color="var(--orange2)"/>
+      </linearGradient>
+      <radialGradient id="gradDot">
+        <stop offset="0%" stop-color="#ffd27a"/>
+        <stop offset="100%" stop-color="var(--orange1)"/>
+      </radialGradient>
+    </defs>
+
+    <!-- dot 1 -> top stroke of the S (bulges left) -->
+    <path id="sTop" class="stroke" d="M 200 72 A 90 68 0 10 0 200 195"/>
+    <!-- dot 3 -> bottom stroke of the S (bulges right) -->
+    <path id="sBottom" class="stroke" d="M 200 200 A 90 68 0 0 1 200 320"/>
+
+    <!-- dot 2: stays centered, bridges the two strokes -->
+    <circle class="dotGlow" cx="200" cy="200" r="22"/>
+    <circle class="dot" cx="200" cy="200" r="11"/>
+  </svg>
+  <div id="wordmark">SENTINELA</div>
+</div>
+
+</body>
+</html>

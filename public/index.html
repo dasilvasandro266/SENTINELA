@@ -924,9 +924,144 @@ body.auth-page {
 }
 
   </style>
+
+  <!-- ════════════════════════════════════════
+       SPLASH SCREEN DE INICIALIZAÇÃO — sentinela-splash
+       (mostrado apenas na primeira visita / primeiro carregamento)
+       ════════════════════════════════════════ -->
+  <style>
+    :root{
+      --splash-orange1:#ffb020;
+      --splash-orange2:#ff7a1a;
+    }
+
+    #sentinela-splash-screen{
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.5s ease;
+    }
+    #sentinela-splash-screen.splash-hidden{
+      opacity: 0;
+      pointer-events: none;
+    }
+    #sentinela-splash-screen[hidden]{
+      display: none;
+    }
+
+    #splash{
+      width: 320px;
+      height: 320px;
+      position: relative;
+    }
+    #splash svg{
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+    #splash .stroke{
+      fill:none;
+      stroke:url(#sentinela-splash-grad);
+      stroke-linecap:round;
+      stroke-width:26;
+      vector-effect:non-scaling-stroke;
+    }
+    #splash .dot{ fill:url(#sentinela-splash-grad-dot); }
+    #splash .dotGlow{
+      fill: var(--splash-orange1);
+      opacity:0.35;
+      filter:blur(8px);
+    }
+
+    #splash-wordmark{
+      position:absolute;
+      bottom:-6px;
+      left:50%;
+      transform:translateX(-50%);
+      letter-spacing:8px;
+      font-size:26px;
+      font-weight:600;
+      opacity:0;
+      white-space:nowrap;
+      color:#fff;
+      font-family:'Segoe UI', Arial, sans-serif;
+    }
+
+    /* single continuous motion, ~2.6s, plays once (no loop) */
+    #splash-sTop{
+      transform-origin: 200px 195px;
+      animation: splashSTopAnim 2.6s cubic-bezier(.65,0,.35,1) forwards;
+    }
+    #splash-sBottom{
+      transform-origin: 200px 205px;
+      animation: splashSBottomAnim 2.6s cubic-bezier(.65,0,.35,1) forwards;
+    }
+    #splash .dot, #splash .dotGlow{ animation: splashDotAnim 2.6s cubic-bezier(.65,0,.35,1) forwards; }
+    #splash-wordmark{ animation: splashWordAnim 2.6s cubic-bezier(.65,0,.35,1) forwards; }
+
+    @keyframes splashSTopAnim{
+      0%   { transform: translate(-70px,15px) scale(0.02) rotate(0deg); }
+      20%  { transform: translate(-70px,15px) scale(0.02) rotate(0deg); }
+      55%  { transform: translate(-70px,15px) scale(1) rotate(0deg); }
+      100% { transform: translate(0,0) scale(1) rotate(0deg); }
+    }
+    @keyframes splashSBottomAnim{
+      0%   { transform: translate(70px,-15px) scale(0.02) rotate(0deg); }
+      20%  { transform: translate(70px,-15px) scale(0.02) rotate(0deg); }
+      55%  { transform: translate(70px,-15px) scale(1) rotate(0deg); }
+      100% { transform: translate(0,0) scale(1) rotate(0deg); }
+    }
+    @keyframes splashDotAnim{
+      0%   { r:11; }
+      52%  { r:11; }
+      63%  { r:15; }
+      74%  { r:11; }
+      100% { r:11; }
+    }
+    @keyframes splashWordAnim{
+      0%,68%{ opacity:0; transform:translateX(-50%) translateY(6px); }
+      82%   { opacity:1; transform:translateX(-50%) translateY(0); }
+      100%  { opacity:1; }
+    }
+  </style>
 </head>
 
 <body class="auth-page">
+
+  <!-- ════════════════════════════════════════
+       SPLASH SCREEN — visível apenas no primeiro carregamento
+       (controlado pelo script no fim do <body>)
+       ════════════════════════════════════════ -->
+  <div id="sentinela-splash-screen">
+    <div id="splash">
+      <svg viewBox="0 0 400 400">
+        <defs>
+          <linearGradient id="sentinela-splash-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="var(--splash-orange1)"/>
+            <stop offset="100%" stop-color="var(--splash-orange2)"/>
+          </linearGradient>
+          <radialGradient id="sentinela-splash-grad-dot">
+            <stop offset="0%" stop-color="#ffd27a"/>
+            <stop offset="100%" stop-color="var(--splash-orange1)"/>
+          </radialGradient>
+        </defs>
+
+        <!-- dot 1 -> top stroke of the S (bulges left) -->
+        <path id="splash-sTop" class="stroke" d="M 200 72 A 90 68 0 10 0 200 195"/>
+        <!-- dot 3 -> bottom stroke of the S (bulges right) -->
+        <path id="splash-sBottom" class="stroke" d="M 200 200 A 90 68 0 0 1 200 320"/>
+
+        <!-- dot 2: stays centered, bridges the two strokes -->
+        <circle class="dotGlow" cx="200" cy="200" r="22"/>
+        <circle class="dot" cx="200" cy="200" r="11"/>
+      </svg>
+      <div id="splash-wordmark">SENTINELA</div>
+    </div>
+  </div>
 
   <!-- ════════════════════════════════════════
        ESTRUTURA PARTILHADA — carrossel lateral + painel direito
@@ -1722,6 +1857,51 @@ body.auth-page {
           card.style.transform = 'rotateX(0deg) rotateY(0deg)';
         });
       });
+    })();
+  </script>
+
+  <!-- ════════════════════════════════════════
+       GERAL / GLOBAL — sentinela-splash.js
+       Controla a exibição da animação de abertura:
+       • Primeira vez  → mostra animação, depois guarda estado e revela a app
+       • Próximas vezes → salta a animação e entra directamente
+       ════════════════════════════════════════ -->
+  <script>
+    (function () {
+      var STORAGE_KEY = 'sentinelaSplashShown';
+      var splash = document.getElementById('sentinela-splash-screen');
+      if (!splash) return;
+
+      var jaIniciou = false;
+      try {
+        jaIniciou = sessionStorage.getItem(STORAGE_KEY) === 'true';
+      } catch (e) {
+        jaIniciou = false;
+      }
+
+      if (jaIniciou) {
+        // Já iniciou antes nesta sessão → salta a animação, entra directamente
+        splash.setAttribute('hidden', '');
+        return;
+      }
+
+      // Primeira vez → mostra a animação e depois esconde
+      var ANIMATION_DURATION_MS = 2600;
+      var MINIMUM_DISPLAY_MS = 2600; // não esconder antes da animação terminar
+
+      window.setTimeout(function () {
+        try {
+          sessionStorage.setItem(STORAGE_KEY, 'true');
+        } catch (e) {
+          /* sessionStorage indisponível — a animação será mostrada novamente, sem problema */
+        }
+
+        splash.classList.add('splash-hidden');
+        splash.addEventListener('transitionend', function onEnd() {
+          splash.setAttribute('hidden', '');
+          splash.removeEventListener('transitionend', onEnd);
+        });
+      }, Math.max(ANIMATION_DURATION_MS, MINIMUM_DISPLAY_MS));
     })();
   </script>
 </body>

@@ -1,0 +1,208 @@
+/* ======================================================================
+   SIDEBAR.CSS
+   Navegação principal partilhada entre páginas (componente).
+   Desktop: coluna fixa à esquerda, preta.
+   Mobile: barra fixa inferior, apenas ícones.
+   ====================================================================== */
+
+:root {
+  --sidebar-width: 220px;
+  --sidebar-width-collapsed: 76px;
+  --sidebar-bottom-height: 64px;
+  --sidebar-bg: #0a0a0c;
+  --sidebar-border: rgba(255, 255, 255, 0.08);
+  --sidebar-text: rgba(255, 255, 255, 0.62);
+  --sidebar-text-active: #ffffff;
+  --sidebar-accent: darkmagenta;
+}
+
+/* Reserva de espaço no layout da página */
+body.has-sidebar {
+  padding-left: var(--sidebar-width);
+}
+
+.app-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: var(--sidebar-width);
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  background: var(--sidebar-bg);
+  border-right: 1px solid var(--sidebar-border);
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.35);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.app-sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 22px 20px;
+  text-decoration: none;
+  border-bottom: 1px solid var(--sidebar-border);
+  flex-shrink: 0;
+}
+
+.app-sidebar-brand-mark {
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    background: linear-gradient(145deg, rgba(245, 240, 230, 0.26), rgba(245, 240, 230, 0.08));
+    border: 1px solid rgba(245, 240, 230, 0.28);
+}
+
+.app-sidebar-brand-label {
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.app-sidebar-items {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 14px 10px;
+}
+
+.app-sidebar-items--bottom {
+  margin-top: auto;
+  border-top: 1px solid var(--sidebar-border);
+}
+
+.app-sidebar-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  height: 44px;
+  padding: 0 12px;
+  border-radius: 10px;
+  color: var(--sidebar-text);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: color 0.18s ease, background 0.18s ease;
+}
+
+.app-sidebar-item i {
+  width: 18px;
+  text-align: center;
+  font-size: 0.98rem;
+  flex-shrink: 0;
+}
+
+.app-sidebar-item:hover {
+  color: var(--sidebar-text-active);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.app-sidebar-item.is-active {
+  color: var(--sidebar-text-active);
+  background: rgba(139, 0, 139, 0.16);
+}
+
+.app-sidebar-item.is-active::before {
+  content: "";
+  position: absolute;
+  left: -10px;
+  top: 6px;
+  bottom: 6px;
+  width: 3px;
+  border-radius: 3px;
+  background: var(--sidebar-accent);
+}
+
+/* ----------------------------------------------------------------------
+   Tablet: colapsa para apenas ícones (mantém coluna à esquerda)
+   ---------------------------------------------------------------------- */
+@media (max-width: 920px) {
+  :root {
+    --sidebar-width: var(--sidebar-width-collapsed);
+  }
+
+  .app-sidebar-brand-label,
+  .app-sidebar-item span {
+    display: none;
+  }
+
+  .app-sidebar-brand {
+    justify-content: center;
+    padding: 20px 0;
+  }
+
+  .app-sidebar-item {
+    justify-content: center;
+    padding: 0;
+  }
+
+  .app-sidebar-item.is-active::before {
+    left: 0;
+  }
+}
+
+/* ----------------------------------------------------------------------
+   Mobile: vira barra fixa inferior, ícones apenas
+   ---------------------------------------------------------------------- */
+@media (max-width: 600px) {
+  body.has-sidebar {
+    padding-left: 0;
+    padding-bottom: var(--sidebar-bottom-height);
+  }
+
+  .app-sidebar {
+    top: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: var(--sidebar-bottom-height);
+    flex-direction: row;
+    align-items: center;
+    border-right: none;
+    border-top: 1px solid var(--sidebar-border);
+    box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.4);
+    padding: 0 4px;
+    overflow: visible;
+  }
+
+  .app-sidebar-brand {
+    display: none;
+  }
+
+  .app-sidebar-items {
+    flex: 1;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 0;
+  }
+
+  .app-sidebar-items--bottom {
+    margin-top: 0;
+    border-top: none;
+  }
+
+  .app-sidebar-item {
+    height: 100%;
+    border-radius: 0;
+  }
+
+  .app-sidebar-item.is-active::before {
+    left: 50%;
+    top: 4px;
+    bottom: auto;
+    width: 22px;
+    height: 3px;
+    transform: translateX(-50%);
+  }
+}

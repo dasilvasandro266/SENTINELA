@@ -4,20 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SENTINELA</title>
-  <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
   <meta name="description" content="O SENTINELA é uma plataforma especialmente criada para a consulta e o ensino de matérias jurídicas.">
   <meta name="keywords" content="SENTINELA, Direito, Ensino, Jurídico">
   <meta name="author" content="Sandro Da Silva">
   <meta name="robots" content="index, follow">
-  <link rel="manifest" href="/manifest.json">
-  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
 
   <!-- Meta atualizada + mantida a antiga para compatibilidade com iOS mais antigo -->
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="SENTINELA">
   <meta name="theme-color" content="#4a3c2c">
-  <link rel="stylesheet" href="/pwa-install.css">
+  <link rel="stylesheet" href="pwa-install.css">
 
   <!-- ════════════════════════════════════════
        GERAL / GLOBAL — auth.css
@@ -1143,7 +1143,7 @@ body.auth-page {
       <div class="auth-form-wrap" id="loginCard">
 
         <header class="auth-form-header">
-          <h1 class="auth-title">Bem&#8209;vindo<br><em>de volta</em></h1>
+          <h1 class="auth-title"><em>Bem&#8209;vindo!</em></h1>
         </header>
 
         <form id="loginForm" class="auth-form" novalidate>
@@ -1167,12 +1167,13 @@ body.auth-page {
             </label>
             <a class="auth-link" href="#">Esqueci a senha</a>
           </div>
-          <button type="submit" class="btn-primary" id="loginSubmit">Entrar na plataforma</button>
+          <button type="submit" class="btn-primary" id="loginSubmit">Entrar</button>
           <p id="error-message" class="status-message" aria-live="polite"></p>
           <div class="form-ornament">
-            <span class="form-ornament-line"></span>
-            <span class="form-ornament-text">Novo na plataforma?</span>
-            <span class="form-ornament-line"></span>
+            <button type="button" id="googleLoginBtn" class="btn-secondary">
+    <img src="images/google 18x18.svg" width="18">
+    Continuar com Google
+</button>
           </div>
           <p class="auth-footer-text">
             <a href="#" id="linkToCadastro">Criar conta gratuita</a>
@@ -1242,6 +1243,7 @@ body.auth-page {
           <button type="submit" class="btn-primary" id="signupSubmit">Cadastrar</button>
           <p id="cadastro-error-message" class="status-message" aria-live="polite"></p>
           <p id="success-message" class="status-message success" aria-live="polite"></p>
+          
           <div class="form-ornament">
             <span class="form-ornament-line"></span>
             <span class="form-ornament-text">Já tens conta?</span>
@@ -1348,12 +1350,14 @@ body.auth-page {
   </div>
 
   <footer class="page-footer">
-    &copy; 2026 SENTINELA
+    &copy; 2026 ARTIFICE
   </footer>
 
-  <link rel="manifest" href="/manifest.json">
-  <meta name="theme-color" content="#8B008B">
-  <script src="/pwa-install.js"></script>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#4a3c2c">
+
+  <script src="pwa-install.js"></script>
+
   <script>
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
@@ -1497,25 +1501,70 @@ body.auth-page {
 
   <!-- ════════════════════════════════════════
        PROCESSO 1 — LOGIN (index.js)
+       Lógica de autenticação incorporada diretamente aqui
+       (verificação de token com timeout, etc.) — já não depende
+       de authManager.js como ficheiro externo.
        ════════════════════════════════════════ -->
   <script>
+    // ── authManager (incorporado — já não depende de authManager.js) ──
     (function () {
+      const STORAGE_KEY_TOKEN = "token";
+      const STORAGE_KEY_USER = "user";
+      const STORAGE_KEY_USER_DATA = "userData";
+      const STORAGE_KEY_LAST_VERIFIED = "lastVerified";
+      const VERIFY_TIMEOUT_MS = 8000;
+      const API_URL_AM = '/api';
+
+      function fetchWithTimeout(url, options = {}, timeoutMs = VERIFY_TIMEOUT_MS) {
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), timeoutMs);
+        return fetch(url, { ...options, signal: controller.signal }).finally(() => clearTimeout(timer));
+      }
+
+      function clearCache() {
+        localStorage.removeItem(STORAGE_KEY_TOKEN);
+        localStorage.removeItem(STORAGE_KEY_USER);
+        localStorage.removeItem(STORAGE_KEY_USER_DATA);
+        localStorage.removeItem(STORAGE_KEY_LAST_VERIFIED);
+      }
+
+      function isAdminUser(user) {
+        return user?.isAdmin === true || user?.isAdmin === 1 || user?.isAdmin === "1";
+      }
+
+      async function verifyExistingSession() {
+        const token = localStorage.getItem(STORAGE_KEY_TOKEN);
+        const savedUser = localStorage.getItem(STORAGE_KEY_USER);
+        if (!token || !savedUser) return null;
+
+        try {
+          const response = await fetchWithTimeout(`${API_URL_AM}/verify-token`, {
+            method: 'POST',
+            headers: { 'Authorization': `Bearer ${token}` }
+          });
+          if (response.ok) {
+            localStorage.setItem(STORAGE_KEY_LAST_VERIFIED, String(Date.now()));
+            return JSON.parse(savedUser);
+          }
+          clearCache();
+          return null;
+        } catch (error) {
+          console.warn('⚠️ Erro ao verificar token:', error);
+          return null;
+        }
+      }
+
+      window.SentinelaAuth = { clearCache, isAdminUser, verifyExistingSession };
+    })();
+
+    (async function () {
       // URL base do servidor
       const API_URL = '/api';
+      const { clearCache, isAdminUser, verifyExistingSession } = window.SentinelaAuth;
 
       const loginForm = document.getElementById('loginForm');
       const errorMessage = document.getElementById('error-message');
       const loginSubmit = document.getElementById('loginSubmit');
-
-      if (!loginForm) return;
-
-      const isAdmin = (user) => user?.isAdmin === true || user?.isAdmin === 1 || user?.isAdmin === '1';
-
-      function setLoading(isLoading) {
-        if (!loginSubmit) return;
-        loginSubmit.disabled = isLoading;
-        loginSubmit.textContent = isLoading ? 'A entrar...' : 'Entrar';
-      }
 
       // Redireciona de forma segura, dando tempo ao navegador para
       // terminar quaisquer transições/animações em curso antes de navegar.
@@ -1524,6 +1573,22 @@ body.auth-page {
         requestAnimationFrame(() => {
           window.location.href = url;
         });
+      }
+
+      // Se já existe uma sessão válida (token confirmado no servidor),
+      // redireciona logo.
+      const existingUser = await verifyExistingSession();
+      if (existingUser) {
+        safeRedirect('home.html');
+        return;
+      }
+
+      if (!loginForm) return;
+
+      function setLoading(isLoading) {
+        if (!loginSubmit) return;
+        loginSubmit.disabled = isLoading;
+        loginSubmit.textContent = isLoading ? 'A entrar...' : 'Entrar';
       }
 
       loginForm.addEventListener('submit', async (e) => {
@@ -1560,8 +1625,17 @@ body.auth-page {
             throw { code: response.status, message: data.error };
           }
 
+          // Limpa qualquer sessão anterior em cache antes de gravar a nova,
+          // garantindo que não ficam dados obsoletos do authManager.
+          clearCache();
+
           localStorage.setItem('token', data.token);
           localStorage.setItem('user', JSON.stringify(data.user));
+          localStorage.setItem('userData', JSON.stringify({
+            nome_completo: data.user.nome_completo,
+            isAdmin: isAdminUser(data.user),
+          }));
+          localStorage.setItem('lastVerified', String(Date.now()));
           localStorage.setItem('userUID', data.user.id);
           localStorage.setItem('userEmail', data.user.email);
           localStorage.setItem('userDisplayName', data.user.username);
@@ -1586,31 +1660,6 @@ body.auth-page {
         }
 
         errorMessage.innerText = errorText;
-      }
-
-      window.addEventListener('load', () => {
-        const token = localStorage.getItem('token');
-        if (token) {
-          verifyToken(token);
-        }
-      });
-
-      async function verifyToken(token) {
-        try {
-          const response = await fetch(`${API_URL}/verify-token`, {
-            method: 'POST',
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-
-          if (response.ok) {
-            const user = JSON.parse(localStorage.getItem('user') || '{}');
-            safeRedirect('home.html');
-          }
-        } catch (error) {
-          console.log('Token inválido ou expirado');
-        }
       }
     })();
   </script>
@@ -1886,8 +1935,8 @@ body.auth-page {
       }
 
       // Primeira vez → mostra a animação e depois esconde
-      var ANIMATION_DURATION_MS = 2600;
-      var MINIMUM_DISPLAY_MS = 2600; // não esconder antes da animação terminar
+      var ANIMATION_DURATION_MS = 3000;
+      var MINIMUM_DISPLAY_MS = 3000; // não esconder antes da animação terminar
 
       window.setTimeout(function () {
         try {
@@ -1904,5 +1953,6 @@ body.auth-page {
       }, Math.max(ANIMATION_DURATION_MS, MINIMUM_DISPLAY_MS));
     })();
   </script>
+
 </body>
 </html>

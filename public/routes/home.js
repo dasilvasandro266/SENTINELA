@@ -1,5 +1,7 @@
 // home.js - Lógica completa da página inicial
-import { getUser, getUserData, authenticatedFetch, clearCache, isAdminUser } from "../authManager.js";
+import { getUser, getUserData, authenticatedFetch, clearCache, isAdminUser } from "/authManager.js";
+import Sidebar from "/components/Sidebar/Sidebar.js";
+import Footer from "/components/Footer/Footer.js";
 import ActiveDocumentsManager from '/active-documents/ActiveDocumentsManager.js';
 
 // ============================================
@@ -1700,7 +1702,6 @@ async function abrirConteudoFase(faseData) {
         conteudoHtml = `
             <div class="sentinela-bold">Conteúdo de ${escapeHtml(subtema)}</div>
             <p>Conteúdo ainda não cadastrado para esta fase.</p>
-            <p>Utilize a rota <code>POST /api/home/fase-conteudo</code> para cadastrar no PostgreSQL.</p>
         `;
     }
 
@@ -2088,7 +2089,6 @@ function getPendingSubtemaFromUrl() {
         fase: subtema,
     };
 }
-
 
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {

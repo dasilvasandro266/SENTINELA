@@ -1,4 +1,6 @@
 import { authenticatedFetch, clearCache, getUser, isAdminUser } from "./authManager.js";
+import Sidebar from "/components/Sidebar/Sidebar.js";
+import Footer from "/components/Footer/Footer.js";
 
 const API_URL = "/api";
 

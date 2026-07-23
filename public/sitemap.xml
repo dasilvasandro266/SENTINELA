@@ -2,15 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <!-- Página inicial -->
     <url>
-        <loc>https://sentinela-9.web.app/</loc>
-        <lastmod>2024-12-15</lastmod>
+        <loc>https://sentinelapro.web.app/</loc>
+        <lastmod>2026-07-23</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
     <!-- Página de funcionalidade 1 -->
     <url>
-        <loc>https://sentinela-9.web.app/cadastro.html</loc>
-        <lastmod>2024-12-15</lastmod>
+        <loc>https://sentinelapro.web.app/</loc>
+        <lastmod>2026-07-23</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>

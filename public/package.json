@@ -8,11 +8,12 @@
     "dev": "nodemon server/server.js"
   },
   "dependencies": {
-    "express": "^4.18.2",
-    "sqlite3": "^5.1.6",
+    "@dataconnect/generated": "file:src/dataconnect-generated",
     "bcrypt": "^5.1.1",
-    "jsonwebtoken": "^9.0.2",
     "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "sqlite3": "^5.1.6",
     "uuid": "^9.0.1"
   },
   "devDependencies": {

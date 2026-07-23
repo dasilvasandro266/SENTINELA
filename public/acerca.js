@@ -1,4 +1,6 @@
 import { authenticatedFetch } from "./authManager.js";
+import Sidebar from "/components/Sidebar/Sidebar.js";
+import Footer from "/components/Footer/Footer.js";
 
 function normalizarGestores(gestoresData) {
     if (!gestoresData) return [];
@@ -273,6 +275,7 @@ async function carregarConteudosAutores() {
 }
 
 (async () => {
+    await Promise.all([Sidebar.mount(), Footer.mount()]);
     await carregarConteudosAutores();
     await carregarGestoresLocal();
     document.querySelectorAll('.gestores-filtro').forEach((btn) => {

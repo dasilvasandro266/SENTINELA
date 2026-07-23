@@ -2,6 +2,8 @@
 // Re-exporta e inicializa funcionalidades do jurisprudencia.js principal
 
 import { authenticatedFetch, getUser, isAdminUser } from "../authManager.js";
+import Sidebar from "/components/Sidebar/Sidebar.js";
+import Footer from "/components/Footer/Footer.js";
 
 const API_URL = "/api";
 

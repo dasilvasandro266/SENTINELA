@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SENTINELA · Acerca</title>
     <link rel="stylesheet" href="acerca.css">
-    <link rel="stylesheet" href="anime-nav.css">
+    <link rel="stylesheet" href="global.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <!-- Fontes mais elegantes -->
@@ -13,21 +13,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
 </head>
-<body class="has-anime-nav">
+<body class="has-sidebar">
 
-  <header class="anime-nav-wrap">
-    <nav class="anime-nav" id="animeNav">
-      <span class="anime-nav-glow" id="animeNavGlow" aria-hidden="true"></span>
-
-      <a href="home.html" class="anime-nav-item" data-nav-item><i class="fa-solid fa-house"></i><span>Home</span></a>
-      <a href="legislacao.html" class="anime-nav-item" data-nav-item><i class="fa-solid fa-scale-balanced"></i><span>Legislação</span></a>
-      <a href="jurisprudencia.html" class="anime-nav-item" data-nav-item><i class="fa-solid fa-gavel"></i><span>Jurisprudência</span></a>
-      <a href="sumários.html" class="anime-nav-item" data-nav-item><i class="fa-solid fa-list-check"></i><span>Sumários</span></a>
-      <a href="acerca.html" class="anime-nav-item is-active" data-nav-item><i class="fa-solid fa-circle-info"></i><span>Acerca</span></a>
-      <a href="perfil.html" class="anime-nav-item" data-nav-item><i class="fa-solid fa-user"></i><span>Perfil</span></a>
-      <a href="editor-conteudo.html" id="linkEditorConteudo" class="anime-nav-item" data-nav-item hidden><i class="fa-solid fa-pen-ruler"></i><span>Editor</span></a>
-    </nav>
-  </header>
+    <!-- A sidebar é montada aqui dinamicamente por Sidebar.mount() (ver acerca.js) -->
 
     <!-- Hero minimalista -->
     <div class="hero-minimal">
@@ -70,11 +58,6 @@
             <div class="cta-glow"></div>
             
             <div class="cta-content">
-                <!-- Badge "AO" com efeito ao vivo -->
-                <div class="cta-badge">
-                    <span class="badge-pulse"></span>
-                    <span class="badge-text">Feito em Angola 🇦🇴</span>
-                </div>
 
                 <h2 class="cta-headline">
                     <span class="cta-headline-soft">O direito numa nova</span><br />
@@ -93,64 +76,11 @@
         </div>
     </section>
 
-        <!-- Rodapé -->
-    <footer class="footer7">
-        <div class="footer7-container">
-            <div class="footer7-top">
-                <div class="footer7-brand">
-                    <a href="home.html" class="footer7-logo" aria-label="SENTINELA">
-                        <span class="footer7-logo-mark">S</span>
-                        <span class="footer7-logo-title">SENTINELA</span>
-                    </a>
-                    <p class="footer7-description">Uma plataforma jurídica para consulta inteligente, estudo contínuo e domínio prático das principais fontes do Direito.</p>
-                    <ul class="footer7-social">
-                        <li><a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a></li>
-                        <li><a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a></li>
-                        <li><a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a></li>
-                        <li><a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a></li>
-                    </ul>
-                </div>
+    <!-- O footer é montado aqui dinamicamente por Footer.mount() (ver acerca.js) -->
 
-                <div class="footer7-grid">
-                    <div>
-                        <h3>Produto</h3>
-                        <ul>
-                            <li><a href="legislacao.html">Legislação</a></li>
-                            <li><a href="jurisprudencia.html">Jurisprudência</a></li>
-                            <li><a href="sumários.html">Sumários</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3>Plataforma</h3>
-                        <ul>
-                            <li><a href="acerca.html">Acerca</a></li>
-                            <li><a href="editor-conteudo.html">Editor</a></li>
-                            <li><a href="/admin/admin.html">Painel de administração</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3>Suporte</h3>
-                        <ul>
-                            <li><a href="/app/contacto">Contacto</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="footer7-bottom">
-                        <ul>
-                            <li><a href="/app/termos.html">Termos e Condições</a></li>
-                            <li><a href="/app/privacidade.html">Política de Privacidade</a></li>
-                        </ul>
-                <p>&copy; 2026 SENTINELA. Todos os direitos reservados.</p>
-            </div>
-        </div>
-    </footer>
-
-        <!-- Scripts -->
+    <!-- Scripts -->
     <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
     <script src="glsl-hills.js"></script>
-    <script src="home-nav.js"></script>
     <script type="module" src="acerca.js"></script>
 </body>
 </html>

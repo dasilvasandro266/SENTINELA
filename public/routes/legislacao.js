@@ -1,6 +1,6 @@
-import { authenticatedFetch } from "../authManager.js";
-import { getUser } from "../authManager.js";
-import { isAdminUser } from "../authManager.js";
+import { getUser, authenticatedFetch, isAdminUser } from "/authManager.js";
+import Sidebar from "/components/Sidebar/Sidebar.js";
+import Footer from "/components/Footer/Footer.js";
 
 const API_URL = '/api';
 

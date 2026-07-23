@@ -1,0 +1,13 @@
+specVersion: "v1"
+serviceId: "artifice-27bba-service"
+location: "us-east4"
+schemas:
+  - source: "./schema"
+    datasource:
+      postgresql:
+        database: "artifice-27bba-database"
+        cloudSql:
+          instanceId: "artifice-27bba-instance"
+          # schemaValidation: "STRICT"     # STRICT mode makes Postgres schema match Data Connect exactly.
+          # schemaValidation: "COMPATIBLE" # COMPATIBLE mode makes Postgres schema compatible with Data Connect.
+connectorDirs: ["./example"]
